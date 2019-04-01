@@ -301,6 +301,7 @@ CREATE TABLE `banner` (
   `texto` text NOT NULL,
   `href` varchar(100) NOT NULL,
   `nomeBotao` varchar(45) NOT NULL,
+  `ativo` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`idBanner`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -761,7 +762,7 @@ CREATE TABLE `cupom` (
   `desconto` float NOT NULL,
   PRIMARY KEY (`idCupom`),
   UNIQUE KEY `cupom_UNIQUE` (`cupom`),
-  KEY `idCliente_idx` (`idCliente`),
+  KEY `idCliente` (`idCliente`),
   CONSTRAINT `cupom_ibfk_1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idcliente`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -863,10 +864,10 @@ DROP TABLE IF EXISTS `email_marketing_fale_conosco`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `email_marketing_fale_conosco` (
-  `Email_Marketing_Fale_Conosco` int(11) NOT NULL AUTO_INCREMENT,
+  `idEmail_Marketing_Fale_Conosco` int(11) NOT NULL AUTO_INCREMENT,
   `idEmail_Marketing` int(11) NOT NULL,
   `idFale_Conosco` int(11) NOT NULL,
-  PRIMARY KEY (`Email_Marketing_Fale_Conosco`),
+  PRIMARY KEY (`idEmail_Marketing_Fale_Conosco`),
   KEY `idEmail_Marketing` (`idEmail_Marketing`),
   KEY `idFale_Conosco` (`idFale_Conosco`),
   CONSTRAINT `email_marketing_fale_conosco_ibfk_1` FOREIGN KEY (`idEmail_Marketing`) REFERENCES `email_marketing` (`idemail_marketing`),
@@ -1141,14 +1142,11 @@ CREATE TABLE `funcionario` (
   `dataAdmissao` date NOT NULL,
   `dataDemissao` date DEFAULT NULL,
   `salario` float NOT NULL,
-  `idNivel` int(11) NOT NULL,
   `idCargo` int(11) NOT NULL,
   `permissoesDesktop` int(11) DEFAULT NULL,
   PRIMARY KEY (`idFuncionario`),
-  KEY `idNivel` (`idNivel`),
   KEY `idCargo` (`idCargo`),
-  CONSTRAINT `funcionario_ibfk_1` FOREIGN KEY (`idNivel`) REFERENCES `nivel` (`idnivel`),
-  CONSTRAINT `funcionario_ibfk_2` FOREIGN KEY (`idCargo`) REFERENCES `cargo` (`idcargo`)
+  CONSTRAINT `funcionario_ibfk_1` FOREIGN KEY (`idCargo`) REFERENCES `cargo` (`idcargo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1821,6 +1819,35 @@ LOCK TABLES `unidade_medida` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `usuario_web`
+--
+
+DROP TABLE IF EXISTS `usuario_web`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `usuario_web` (
+  `idUsuario_Web` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(45) NOT NULL,
+  `senha` varchar(10) NOT NULL,
+  `idNivel` int(11) NOT NULL,
+  `nome` varchar(45) NOT NULL,
+  PRIMARY KEY (`idUsuario_Web`),
+  UNIQUE KEY `email_UNIQUE` (`email`),
+  KEY `idNivel` (`idNivel`),
+  CONSTRAINT `usuario_web_ibfk_1` FOREIGN KEY (`idNivel`) REFERENCES `nivel` (`idnivel`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `usuario_web`
+--
+
+LOCK TABLES `usuario_web` WRITE;
+/*!40000 ALTER TABLE `usuario_web` DISABLE KEYS */;
+/*!40000 ALTER TABLE `usuario_web` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `veiculo`
 --
 
@@ -1870,4 +1897,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-01 10:09:43
+-- Dump completed on 2019-04-01 11:09:46
