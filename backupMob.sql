@@ -1282,7 +1282,7 @@ CREATE TABLE `nivel` (
   `descricao` varchar(80) NOT NULL,
   `permissoes` int(11) DEFAULT NULL,
   PRIMARY KEY (`idNivel`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1291,6 +1291,7 @@ CREATE TABLE `nivel` (
 
 LOCK TABLES `nivel` WRITE;
 /*!40000 ALTER TABLE `nivel` DISABLE KEYS */;
+INSERT INTO `nivel` VALUES (1,'Administrador','Controla tudo',127),(2,'Marketing','Controla e-mail',32);
 /*!40000 ALTER TABLE `nivel` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1758,7 +1759,7 @@ DROP TABLE IF EXISTS `tipo_veiculo`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `tipo_veiculo` (
   `idTipo_Veiculo` int(11) NOT NULL AUTO_INCREMENT,
-  `nomeTipo` int(11) NOT NULL,
+  `nomeTipo` varchar(20) NOT NULL,
   PRIMARY KEY (`idTipo_Veiculo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1835,7 +1836,7 @@ CREATE TABLE `usuario_web` (
   UNIQUE KEY `email_UNIQUE` (`email`),
   KEY `idNivel` (`idNivel`),
   CONSTRAINT `usuario_web_ibfk_1` FOREIGN KEY (`idNivel`) REFERENCES `nivel` (`idnivel`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1844,6 +1845,7 @@ CREATE TABLE `usuario_web` (
 
 LOCK TABLES `usuario_web` WRITE;
 /*!40000 ALTER TABLE `usuario_web` DISABLE KEYS */;
+INSERT INTO `usuario_web` VALUES (1,'teste@teste','teste',1,'teste'),(2,'sdasd@dsad','igor',2,'igor');
 /*!40000 ALTER TABLE `usuario_web` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1897,4 +1899,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-01 11:09:46
+-- Dump completed on 2019-04-02  8:33:36
