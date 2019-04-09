@@ -302,7 +302,7 @@ CREATE TABLE `banner` (
   `texto` text NOT NULL,
   `href` varchar(100) NOT NULL,
   `nomeBotao` varchar(45) NOT NULL,
-  `ativo` tinyint(4) DEFAULT NULL,
+  `ativo` tinyint(4) DEFAULT '1',
   PRIMARY KEY (`idBanner`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -820,7 +820,7 @@ CREATE TABLE `email_marketing` (
   `assunto` varchar(100) DEFAULT NULL,
   `corpo` text NOT NULL,
   PRIMARY KEY (`idEmail_Marketing`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -829,6 +829,7 @@ CREATE TABLE `email_marketing` (
 
 LOCK TABLES `email_marketing` WRITE;
 /*!40000 ALTER TABLE `email_marketing` DISABLE KEYS */;
+INSERT INTO `email_marketing` VALUES (1,'Envio de Email para testes','Quer que funcione\r\nVai la ver no Posto Ipiranga'),(2,'321321','321'),(3,'1','1');
 /*!40000 ALTER TABLE `email_marketing` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1586,7 +1587,7 @@ CREATE TABLE `pergunta_frequente` (
   `pergunta` text NOT NULL,
   `resposta` text,
   PRIMARY KEY (`idPergunta`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1595,7 +1596,7 @@ CREATE TABLE `pergunta_frequente` (
 
 LOCK TABLES `pergunta_frequente` WRITE;
 /*!40000 ALTER TABLE `pergunta_frequente` DISABLE KEYS */;
-INSERT INTO `pergunta_frequente` VALUES (1,'sdsdsd','sadasdd');
+INSERT INTO `pergunta_frequente` VALUES (2,'hvdjlhdvb','asas'),(3,'hvdjlhdvb','sedgfgh'),(4,'sffdasdas','sedgfgh');
 /*!40000 ALTER TABLE `pergunta_frequente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1965,4 +1966,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-09  9:43:30
+-- Dump completed on 2019-04-09 11:23:37
