@@ -109,7 +109,7 @@ CREATE TABLE `assunto` (
   `idAssunto` int(11) NOT NULL AUTO_INCREMENT,
   `assunto` varchar(45) NOT NULL,
   PRIMARY KEY (`idAssunto`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -118,6 +118,7 @@ CREATE TABLE `assunto` (
 
 LOCK TABLES `assunto` WRITE;
 /*!40000 ALTER TABLE `assunto` DISABLE KEYS */;
+INSERT INTO `assunto` VALUES (1,'Promoção'),(2,'Vendas'),(3,'Aluguel'),(4,'Cadastro de Veiculos');
 /*!40000 ALTER TABLE `assunto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -303,7 +304,7 @@ CREATE TABLE `banner` (
   `nomeBotao` varchar(45) NOT NULL,
   `ativo` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`idBanner`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -312,6 +313,7 @@ CREATE TABLE `banner` (
 
 LOCK TABLES `banner` WRITE;
 /*!40000 ALTER TABLE `banner` DISABLE KEYS */;
+INSERT INTO `banner` VALUES (1,'Como funciona?','arquivos/funciona.png','A MobShare traz inovação quanto o assunto é alugar carro. Faça seu cadastro, busque por um carro, moto ou bicicleta na sua região, converse com o quem que alugaro próprio carro para ter mais facilidade do encontro! Sem conta que você também pode colocar seu carro, se tiver, para alugar!','http://localhost/mobshare/SITE/comofunciona.html','Saiba Mais',1),(3,'BAIXE O APLICATIVO DA MOBSHARE!','arquivos/APPCine.png','Com o aplicativo no seu celular, você tem mais mobilidade para fazer a locação do seu veículo! Rápido, fácil e seguro!','https://www.devmedia.com.br/forum/como-criar-um-array-de-objetos/582805','Download',1);
 /*!40000 ALTER TABLE `banner` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -415,7 +417,7 @@ CREATE TABLE `categoria_veiculo` (
   PRIMARY KEY (`idCategoria_Veiculo`),
   KEY `idTipo_Veiculo` (`idTipo_Veiculo`),
   CONSTRAINT `categoria_veiculo_ibfk_1` FOREIGN KEY (`idTipo_Veiculo`) REFERENCES `tipo_veiculo` (`idtipo_veiculo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -424,6 +426,7 @@ CREATE TABLE `categoria_veiculo` (
 
 LOCK TABLES `categoria_veiculo` WRITE;
 /*!40000 ALTER TABLE `categoria_veiculo` DISABLE KEYS */;
+INSERT INTO `categoria_veiculo` VALUES (1,1,'Carro de passeio',10),(2,1,'Carro de luxo',20),(3,2,'Moto esportiva',10);
 /*!40000 ALTER TABLE `categoria_veiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -447,7 +450,7 @@ CREATE TABLE `cliente` (
   `dataCadastro` date NOT NULL,
   PRIMARY KEY (`idCliente`),
   UNIQUE KEY `cpf_UNIQUE` (`cpf`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -456,6 +459,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
+INSERT INTO `cliente` VALUES (1,'Leonardo','49875265','1970-01-01','54645','A e B','leo@gmail','123',NULL,'2019-04-02');
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -925,8 +929,9 @@ CREATE TABLE `endereco` (
   `UF` varchar(2) NOT NULL,
   `numero` varchar(4) NOT NULL,
   `complemento` varchar(20) DEFAULT NULL,
+  `rua` varchar(45) NOT NULL,
   PRIMARY KEY (`idEndereco`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -935,6 +940,7 @@ CREATE TABLE `endereco` (
 
 LOCK TABLES `endereco` WRITE;
 /*!40000 ALTER TABLE `endereco` DISABLE KEYS */;
+INSERT INTO `endereco` VALUES (1,'Jandira','SP','22',NULL,'Rua das Rosas');
 /*!40000 ALTER TABLE `endereco` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1085,10 +1091,11 @@ CREATE TABLE `foto_veiculo` (
   `idFoto_Veiculo` int(11) NOT NULL AUTO_INCREMENT,
   `idVeiculo` int(11) NOT NULL,
   `fotoVeiculo` varchar(100) NOT NULL,
+  `perfil` varchar(20) NOT NULL,
   PRIMARY KEY (`idFoto_Veiculo`),
   KEY `idVeiculo` (`idVeiculo`),
   CONSTRAINT `foto_veiculo_ibfk_1` FOREIGN KEY (`idVeiculo`) REFERENCES `veiculo` (`idveiculo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1097,6 +1104,7 @@ CREATE TABLE `foto_veiculo` (
 
 LOCK TABLES `foto_veiculo` WRITE;
 /*!40000 ALTER TABLE `foto_veiculo` DISABLE KEYS */;
+INSERT INTO `foto_veiculo` VALUES (1,2,'arquivos/carro.jpeg','frontal'),(2,3,'arquivos/motoHonda.jpg','frontal'),(3,4,'arquivos/motoTransalp.jpg','frontal'),(4,1,'arquivos/carroUno.jpg','frontal');
 /*!40000 ALTER TABLE `foto_veiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1241,6 +1249,31 @@ LOCK TABLES `locacao` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `marca`
+--
+
+DROP TABLE IF EXISTS `marca`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `marca` (
+  `idMarca` int(11) NOT NULL AUTO_INCREMENT,
+  `nomeMarca` varchar(45) NOT NULL,
+  PRIMARY KEY (`idMarca`),
+  UNIQUE KEY `nomeMarca` (`nomeMarca`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `marca`
+--
+
+LOCK TABLES `marca` WRITE;
+/*!40000 ALTER TABLE `marca` DISABLE KEYS */;
+INSERT INTO `marca` VALUES (1,'BMW'),(3,'FIAT'),(2,'HONDA');
+/*!40000 ALTER TABLE `marca` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `mensagem_chat`
 --
 
@@ -1270,6 +1303,34 @@ LOCK TABLES `mensagem_chat` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `modelo`
+--
+
+DROP TABLE IF EXISTS `modelo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `modelo` (
+  `idModelo` int(11) NOT NULL AUTO_INCREMENT,
+  `idMarca` int(11) NOT NULL,
+  `nomeModelo` varchar(45) NOT NULL,
+  PRIMARY KEY (`idModelo`),
+  UNIQUE KEY `nomeModelo` (`nomeModelo`),
+  KEY `idMarca` (`idMarca`),
+  CONSTRAINT `modelo_ibfk_1` FOREIGN KEY (`idMarca`) REFERENCES `marca` (`idmarca`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `modelo`
+--
+
+LOCK TABLES `modelo` WRITE;
+/*!40000 ALTER TABLE `modelo` DISABLE KEYS */;
+INSERT INTO `modelo` VALUES (1,3,'UNO'),(2,2,'MOTONA'),(3,2,'MOTINHA');
+/*!40000 ALTER TABLE `modelo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `nivel`
 --
 
@@ -1282,7 +1343,7 @@ CREATE TABLE `nivel` (
   `descricao` varchar(80) NOT NULL,
   `permissoes` int(11) DEFAULT NULL,
   PRIMARY KEY (`idNivel`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1291,7 +1352,7 @@ CREATE TABLE `nivel` (
 
 LOCK TABLES `nivel` WRITE;
 /*!40000 ALTER TABLE `nivel` DISABLE KEYS */;
-INSERT INTO `nivel` VALUES (1,'Administrador','Controla tudo',127),(2,'Marketing','Controla e-mail',32);
+INSERT INTO `nivel` VALUES (1,'Administrador','Controla tudo',127),(2,'Marketing','Controla e-mail',32),(4,'teste','123456',80);
 /*!40000 ALTER TABLE `nivel` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1525,7 +1586,7 @@ CREATE TABLE `pergunta_frequente` (
   `pergunta` text NOT NULL,
   `resposta` text,
   PRIMARY KEY (`idPergunta`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1534,6 +1595,7 @@ CREATE TABLE `pergunta_frequente` (
 
 LOCK TABLES `pergunta_frequente` WRITE;
 /*!40000 ALTER TABLE `pergunta_frequente` DISABLE KEYS */;
+INSERT INTO `pergunta_frequente` VALUES (1,'sdsdsd','sadasdd');
 /*!40000 ALTER TABLE `pergunta_frequente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1738,7 +1800,7 @@ CREATE TABLE `termo` (
   `texto` text NOT NULL,
   `ativo` tinyint(4) DEFAULT '1',
   PRIMARY KEY (`idTermo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1747,6 +1809,7 @@ CREATE TABLE `termo` (
 
 LOCK TABLES `termo` WRITE;
 /*!40000 ALTER TABLE `termo` DISABLE KEYS */;
+INSERT INTO `termo` VALUES (2,'Termo 1','Talvez você precise registrar-se com a The Coca-Cola Company para obter acesso a determinadas áreas do Site. Com relação a esse registro, nós podemos nos recusar a fornecer a você, ou permitir o uso de, um nome de usuário (ou endereço de e-mail) que já esteja sendo usado por outro usuário; que seja usado para se fazer passar por outra pessoa; que pertença a outra pessoa; que viole a propriedade intelectual ou outros direitos de uma pessoa; que seja ofensivo; ou por outro motivo a nosso critério.',1);
 /*!40000 ALTER TABLE `termo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1761,7 +1824,7 @@ CREATE TABLE `tipo_veiculo` (
   `idTipo_Veiculo` int(11) NOT NULL AUTO_INCREMENT,
   `nomeTipo` varchar(20) NOT NULL,
   PRIMARY KEY (`idTipo_Veiculo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1770,6 +1833,7 @@ CREATE TABLE `tipo_veiculo` (
 
 LOCK TABLES `tipo_veiculo` WRITE;
 /*!40000 ALTER TABLE `tipo_veiculo` DISABLE KEYS */;
+INSERT INTO `tipo_veiculo` VALUES (1,'Carro'),(2,'Moto'),(3,'Bicicleta');
 /*!40000 ALTER TABLE `tipo_veiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1860,8 +1924,6 @@ CREATE TABLE `veiculo` (
   `idVeiculo` int(11) NOT NULL AUTO_INCREMENT,
   `idCategoria_Veiculo` int(11) NOT NULL,
   `idCliente` int(11) NOT NULL,
-  `marca` varchar(45) NOT NULL,
-  `modelo` varchar(45) NOT NULL,
   `cor` varchar(45) NOT NULL,
   `altura` float NOT NULL,
   `comprimento` float NOT NULL,
@@ -1871,14 +1933,17 @@ CREATE TABLE `veiculo` (
   `quilometragem` int(11) DEFAULT NULL,
   `valorVenda` float DEFAULT NULL,
   `idEndereco` int(11) NOT NULL,
+  `idModelo` int(11) NOT NULL,
   PRIMARY KEY (`idVeiculo`),
   KEY `idCategoria_Veiculo` (`idCategoria_Veiculo`),
   KEY `idCliente` (`idCliente`),
   KEY `idEndereco` (`idEndereco`),
+  KEY `idModelo_idx` (`idModelo`),
   CONSTRAINT `veiculo_ibfk_1` FOREIGN KEY (`idCategoria_Veiculo`) REFERENCES `categoria_veiculo` (`idcategoria_veiculo`),
   CONSTRAINT `veiculo_ibfk_2` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idcliente`),
-  CONSTRAINT `veiculo_ibfk_3` FOREIGN KEY (`idEndereco`) REFERENCES `endereco` (`idendereco`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  CONSTRAINT `veiculo_ibfk_3` FOREIGN KEY (`idEndereco`) REFERENCES `endereco` (`idendereco`),
+  CONSTRAINT `veiculo_ibfk_4` FOREIGN KEY (`idModelo`) REFERENCES `modelo` (`idmodelo`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1887,6 +1952,7 @@ CREATE TABLE `veiculo` (
 
 LOCK TABLES `veiculo` WRITE;
 /*!40000 ALTER TABLE `veiculo` DISABLE KEYS */;
+INSERT INTO `veiculo` VALUES (1,1,1,'vermelho',2,1,1,5,1999,50000,80000,1,1),(2,2,1,'preto',2,1,2,10,2000,0,100000,1,3),(3,3,1,'vermelho',2,1,1,50,2017,0,800000,1,1),(4,3,1,'amarelo',2,2,2,10,2010,50000,20000,1,1);
 /*!40000 ALTER TABLE `veiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -1899,4 +1965,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-02  8:33:36
+-- Dump completed on 2019-04-09  9:43:30
