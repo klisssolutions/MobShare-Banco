@@ -304,7 +304,7 @@ CREATE TABLE `banner` (
   `nomeBotao` varchar(45) NOT NULL,
   `ativo` tinyint(4) DEFAULT '1',
   PRIMARY KEY (`idBanner`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -313,7 +313,7 @@ CREATE TABLE `banner` (
 
 LOCK TABLES `banner` WRITE;
 /*!40000 ALTER TABLE `banner` DISABLE KEYS */;
-INSERT INTO `banner` VALUES (1,'Como funciona?','arquivos/funciona.png','A MobShare traz inovação quanto o assunto é alugar carro. Faça seu cadastro, busque por um carro, moto ou bicicleta na sua região, converse com o quem que alugaro próprio carro para ter mais facilidade do encontro! Sem conta que você também pode colocar seu carro, se tiver, para alugar!','http://localhost/mobshare/SITE/comofunciona.html','Saiba Mais',1),(3,'BAIXE O APLICATIVO DA MOBSHARE!','arquivos/APPCine.png','Com o aplicativo no seu celular, você tem mais mobilidade para fazer a locação do seu veículo! Rápido, fácil e seguro!','https://www.devmedia.com.br/forum/como-criar-um-array-de-objetos/582805','Download',1);
+INSERT INTO `banner` VALUES (4,'teste','470ddac915c7529384c83c556ca71bc8.png','bnjkb','kjbjk','jkbjkb',1);
 /*!40000 ALTER TABLE `banner` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -450,7 +450,7 @@ CREATE TABLE `cliente` (
   `dataCadastro` date NOT NULL,
   PRIMARY KEY (`idCliente`),
   UNIQUE KEY `cpf_UNIQUE` (`cpf`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -459,9 +459,26 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (1,'Leonardo','49875265','1970-01-01','54645','A e B','leo@gmail','123',NULL,'2019-04-02');
+INSERT INTO `cliente` VALUES (1,'Leonardo','49875265','1970-01-01','54645','A e B','leo@gmail','123',NULL,'2019-04-02'),(4,'aa','aaaa','1970-01-01','asda','dada','ada','ada',NULL,'1970-01-01');
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `tg_cadastro_cliente_pendencia` AFTER INSERT ON `cliente` FOR EACH ROW begin
+	insert into pendencia_cliente(idCliente, motivo) values(NEW.idCliente, 'Aguardando aprovação');
+end */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `cliente_endereco`
@@ -1121,8 +1138,9 @@ CREATE TABLE `funcionamento` (
   `titulo` varchar(45) NOT NULL,
   `descricao` text NOT NULL,
   `foto` varchar(45) NOT NULL,
+  `ativo` int(11) NOT NULL,
   PRIMARY KEY (`idFuncionamento`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1131,6 +1149,7 @@ CREATE TABLE `funcionamento` (
 
 LOCK TABLES `funcionamento` WRITE;
 /*!40000 ALTER TABLE `funcionamento` DISABLE KEYS */;
+INSERT INTO `funcionamento` VALUES (1,'Como Faço uma Locação','teste','f0096c8e0a05e7c68777699165509a25.png',1),(2,'Como eu me Cadastro','321','7787d26a83ffc742d65f34369d815e06.png',1),(3,'Testando 123','testando321','a2ab03b8bd48777c43d8325f939eee46.png',1),(4,'Testando 123','ighfklgh','0b4e98cd4c3914d5e76b3b08fd3cfd31.png',1),(5,'aaaaaaaaaaa','dasdas','3a1b6316a1c4a8eebb3b3264f5a389fe.png',1);
 /*!40000 ALTER TABLE `funcionamento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1371,8 +1390,9 @@ CREATE TABLE `parceiro` (
   `foto` varchar(45) DEFAULT NULL,
   `descricaoParceiro` text NOT NULL,
   `email` varchar(50) NOT NULL,
+  `ativo` int(11) NOT NULL,
   PRIMARY KEY (`idParceiro`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1381,6 +1401,7 @@ CREATE TABLE `parceiro` (
 
 LOCK TABLES `parceiro` WRITE;
 /*!40000 ALTER TABLE `parceiro` DISABLE KEYS */;
+INSERT INTO `parceiro` VALUES (1,'Kaio','kakakaak','2e4d4c4b7665f536b3c073313d4142d8.png','dfdf','kaio.algo@gmail.com',1);
 /*!40000 ALTER TABLE `parceiro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1496,30 +1517,6 @@ LOCK TABLES `pedido_produto_fornecedor` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `pendencia`
---
-
-DROP TABLE IF EXISTS `pendencia`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `pendencia` (
-  `idPendencia` int(11) NOT NULL AUTO_INCREMENT,
-  `motivo` text NOT NULL,
-  `aberto` tinyint(4) DEFAULT '1',
-  PRIMARY KEY (`idPendencia`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `pendencia`
---
-
-LOCK TABLES `pendencia` WRITE;
-/*!40000 ALTER TABLE `pendencia` DISABLE KEYS */;
-/*!40000 ALTER TABLE `pendencia` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `pendencia_cliente`
 --
 
@@ -1528,14 +1525,13 @@ DROP TABLE IF EXISTS `pendencia_cliente`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `pendencia_cliente` (
   `idPendencia_Cliente` int(11) NOT NULL AUTO_INCREMENT,
-  `idPendencia` int(11) NOT NULL,
   `idCliente` int(11) NOT NULL,
+  `motivo` text,
+  `aberto` tinyint(4) DEFAULT '1',
   PRIMARY KEY (`idPendencia_Cliente`),
   KEY `idCliente` (`idCliente`),
-  KEY `idPendencia` (`idPendencia`),
-  CONSTRAINT `pendencia_cliente_ibfk_1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idcliente`),
-  CONSTRAINT `pendencia_cliente_ibfk_2` FOREIGN KEY (`idPendencia`) REFERENCES `pendencia` (`idpendencia`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  CONSTRAINT `pendencia_cliente_ibfk_1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idcliente`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1544,6 +1540,7 @@ CREATE TABLE `pendencia_cliente` (
 
 LOCK TABLES `pendencia_cliente` WRITE;
 /*!40000 ALTER TABLE `pendencia_cliente` DISABLE KEYS */;
+INSERT INTO `pendencia_cliente` VALUES (1,4,'Aguardando aprovação',1);
 /*!40000 ALTER TABLE `pendencia_cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1556,14 +1553,13 @@ DROP TABLE IF EXISTS `pendencia_veiculo`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `pendencia_veiculo` (
   `idPendencia_Veiculo` int(11) NOT NULL AUTO_INCREMENT,
-  `idPendencia` int(11) NOT NULL,
   `idVeiculo` int(11) NOT NULL,
+  `motivo` text NOT NULL,
+  `aberto` tinyint(4) DEFAULT '1',
   PRIMARY KEY (`idPendencia_Veiculo`),
   KEY `idVeiculo` (`idVeiculo`),
-  KEY `idPendencia` (`idPendencia`),
-  CONSTRAINT `pendencia_veiculo_ibfk_1` FOREIGN KEY (`idVeiculo`) REFERENCES `veiculo` (`idveiculo`),
-  CONSTRAINT `pendencia_veiculo_ibfk_2` FOREIGN KEY (`idPendencia`) REFERENCES `pendencia` (`idpendencia`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  CONSTRAINT `pendencia_veiculo_ibfk_1` FOREIGN KEY (`idVeiculo`) REFERENCES `veiculo` (`idveiculo`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1572,6 +1568,7 @@ CREATE TABLE `pendencia_veiculo` (
 
 LOCK TABLES `pendencia_veiculo` WRITE;
 /*!40000 ALTER TABLE `pendencia_veiculo` DISABLE KEYS */;
+INSERT INTO `pendencia_veiculo` VALUES (1,6,'Aguardando aprovação do cadastro',1);
 /*!40000 ALTER TABLE `pendencia_veiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1944,7 +1941,7 @@ CREATE TABLE `veiculo` (
   CONSTRAINT `veiculo_ibfk_2` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idcliente`),
   CONSTRAINT `veiculo_ibfk_3` FOREIGN KEY (`idEndereco`) REFERENCES `endereco` (`idendereco`),
   CONSTRAINT `veiculo_ibfk_4` FOREIGN KEY (`idModelo`) REFERENCES `modelo` (`idmodelo`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1953,9 +1950,26 @@ CREATE TABLE `veiculo` (
 
 LOCK TABLES `veiculo` WRITE;
 /*!40000 ALTER TABLE `veiculo` DISABLE KEYS */;
-INSERT INTO `veiculo` VALUES (1,1,1,'vermelho',2,1,1,5,1999,50000,80000,1,1),(2,2,1,'preto',2,1,2,10,2000,0,100000,1,3),(3,3,1,'vermelho',2,1,1,50,2017,0,800000,1,1),(4,3,1,'amarelo',2,2,2,10,2010,50000,20000,1,1);
+INSERT INTO `veiculo` VALUES (1,1,1,'vermelho',2,1,1,5,1999,50000,80000,1,1),(2,2,1,'preto',2,1,2,10,2000,0,100000,1,3),(3,3,1,'vermelho',2,1,1,50,2017,0,800000,1,1),(4,3,1,'amarelo',2,2,2,10,2010,50000,20000,1,1),(6,3,1,'torto',2,2,2,10,2010,5000,2000,1,1);
 /*!40000 ALTER TABLE `veiculo` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `tg_cadastro_veiculo_pendencia` AFTER INSERT ON `veiculo` FOR EACH ROW begin
+	insert into pendencia_veiculo(idVeiculo, motivo) values(NEW.idVeiculo, 'Aguardando aprovação do cadastro');
+end */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -1966,4 +1980,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-09 11:23:37
+-- Dump completed on 2019-04-11 11:25:45
