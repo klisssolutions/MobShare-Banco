@@ -304,7 +304,7 @@ CREATE TABLE `banner` (
   `nomeBotao` varchar(45) NOT NULL,
   `ativo` tinyint(4) DEFAULT '1',
   PRIMARY KEY (`idBanner`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -313,7 +313,7 @@ CREATE TABLE `banner` (
 
 LOCK TABLES `banner` WRITE;
 /*!40000 ALTER TABLE `banner` DISABLE KEYS */;
-INSERT INTO `banner` VALUES (4,'teste','470ddac915c7529384c83c556ca71bc8.png','bnjkb','kjbjk','jkbjkb',1);
+INSERT INTO `banner` VALUES (4,'teste','8a510334d2a0a572eca9574a45e7d867.png','bnjkb','kjbjk','jkbjkb',1),(5,'qaaa','4f0b6edcec6c00b35c7a7a791602f425.png','sdfsdfds','sdfsdf','aaaa',1);
 /*!40000 ALTER TABLE `banner` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -335,7 +335,7 @@ CREATE TABLE `cancelamento` (
   KEY `idCliente` (`idCliente`),
   CONSTRAINT `cancelamento_ibfk_1` FOREIGN KEY (`idLocacao`) REFERENCES `locacao` (`idlocacao`),
   CONSTRAINT `cancelamento_ibfk_2` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idcliente`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -344,6 +344,7 @@ CREATE TABLE `cancelamento` (
 
 LOCK TABLES `cancelamento` WRITE;
 /*!40000 ALTER TABLE `cancelamento` DISABLE KEYS */;
+INSERT INTO `cancelamento` VALUES (1,1,4,NULL,'A inteligência artificial é um ramo de pesquisa da ciência da computação que busca, através de símbolos computacionais, construir mecanismos e/ou dispositivos que simulem a capacidade do ser humano de pensar, resolver problemas, ou seja, de ser inteligente. O estudo e desenvolvimento desse ramo de pesquisa tiveram início na Segunda Guerra Mundial.');
 /*!40000 ALTER TABLE `cancelamento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -459,7 +460,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (1,'Leonardo','49875265','1970-01-01','54645','A e B','leo@gmail','123',NULL,'2019-04-02'),(4,'aa','aaaa','1970-01-01','asda','dada','ada','ada',NULL,'1970-01-01');
+INSERT INTO `cliente` VALUES (1,'Leonardo','49875265','1970-01-01','54645','A e B','leo@gmail','123',NULL,'2019-04-02'),(4,'Maria','aaaa','1970-01-01','asda','dada','ada','ada',NULL,'1970-01-01');
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -1122,7 +1123,7 @@ CREATE TABLE `foto_veiculo` (
 
 LOCK TABLES `foto_veiculo` WRITE;
 /*!40000 ALTER TABLE `foto_veiculo` DISABLE KEYS */;
-INSERT INTO `foto_veiculo` VALUES (1,2,'arquivos/carro.jpeg','frontal'),(2,3,'arquivos/motoHonda.jpg','frontal'),(3,4,'arquivos/motoTransalp.jpg','frontal'),(4,1,'arquivos/carroUno.jpg','frontal');
+INSERT INTO `foto_veiculo` VALUES (1,2,'carro.jpeg','frontal'),(2,3,'motoHonda.jpg','frontal'),(3,4,'motoTransalp.jpg','frontal'),(4,1,'carroUno.jpg','frontal');
 /*!40000 ALTER TABLE `foto_veiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1256,7 +1257,7 @@ CREATE TABLE `locacao` (
   PRIMARY KEY (`idLocacao`),
   KEY `idSolicitacao_Locador` (`idSolicitacao_Locador`),
   CONSTRAINT `locacao_ibfk_1` FOREIGN KEY (`idSolicitacao_Locador`) REFERENCES `solicitacao_locacao` (`idsolicitacao_locacao`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1265,6 +1266,7 @@ CREATE TABLE `locacao` (
 
 LOCK TABLES `locacao` WRITE;
 /*!40000 ALTER TABLE `locacao` DISABLE KEYS */;
+INSERT INTO `locacao` VALUES (1,1);
 /*!40000 ALTER TABLE `locacao` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1392,7 +1394,7 @@ CREATE TABLE `parceiro` (
   `email` varchar(50) NOT NULL,
   `ativo` int(11) NOT NULL,
   PRIMARY KEY (`idParceiro`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1401,7 +1403,7 @@ CREATE TABLE `parceiro` (
 
 LOCK TABLES `parceiro` WRITE;
 /*!40000 ALTER TABLE `parceiro` DISABLE KEYS */;
-INSERT INTO `parceiro` VALUES (1,'Kaio','kakakaak','2e4d4c4b7665f536b3c073313d4142d8.png','dfdf','kaio.algo@gmail.com',1);
+INSERT INTO `parceiro` VALUES (38,'Kaio Wesley','kakakaakjjjjjjjjjjjjjjjjjjjj','60464d527cb20dbde61602ec3cc3c3fc.png','teste','kaio.algo@gmail.com.br',1),(39,'Kaio Wesley','kakakaakjjjjjjjjjjjjjjjjjjjj','1be024378000451d5013b7e719727abd.png','teste','kaio.algo@gmail.com.br',1),(40,'Kaio Wesley','kakakaakjjjjjjjjjjjjjjjjjjjj','9ff9e3a8770ad60028201fbe7cfe1a68.png','qwe','kaio.algo@gmail.com',1),(41,'dasd','kakakaakjjjjjjjjjjjjjjjjjjjj','10c75c1cacb0711348f25c93cdf01ab1.png','321','kaio.algo@gmail.com',1);
 /*!40000 ALTER TABLE `parceiro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1583,8 +1585,9 @@ CREATE TABLE `pergunta_frequente` (
   `idPergunta` int(11) NOT NULL AUTO_INCREMENT,
   `pergunta` text NOT NULL,
   `resposta` text,
+  `ativo` tinyint(4) NOT NULL,
   PRIMARY KEY (`idPergunta`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1593,7 +1596,7 @@ CREATE TABLE `pergunta_frequente` (
 
 LOCK TABLES `pergunta_frequente` WRITE;
 /*!40000 ALTER TABLE `pergunta_frequente` DISABLE KEYS */;
-INSERT INTO `pergunta_frequente` VALUES (2,'hvdjlhdvb','asas'),(3,'hvdjlhdvb','sedgfgh'),(4,'sffdasdas','sedgfgh');
+INSERT INTO `pergunta_frequente` VALUES (21,'EAE','Pergunta no posto Ipiranga',1),(22,'kopç','mklpçk',1),(23,'hvdjlhdvb','asas',1),(24,'Perguntas','Frequentes',0),(25,'Rafael é besta? ','Talvez !',1);
 /*!40000 ALTER TABLE `pergunta_frequente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1747,7 +1750,7 @@ CREATE TABLE `solicitacao_locacao` (
   KEY `idVeiculo` (`idVeiculo`),
   CONSTRAINT `solicitacao_locacao_ibfk_1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idcliente`),
   CONSTRAINT `solicitacao_locacao_ibfk_2` FOREIGN KEY (`idVeiculo`) REFERENCES `veiculo` (`idveiculo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1756,6 +1759,7 @@ CREATE TABLE `solicitacao_locacao` (
 
 LOCK TABLES `solicitacao_locacao` WRITE;
 /*!40000 ALTER TABLE `solicitacao_locacao` DISABLE KEYS */;
+INSERT INTO `solicitacao_locacao` VALUES (1,4,1,1,'2019-04-15 00:00:00','2019-04-15 00:00:00',NULL);
 /*!40000 ALTER TABLE `solicitacao_locacao` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1898,7 +1902,7 @@ CREATE TABLE `usuario_web` (
   UNIQUE KEY `email_UNIQUE` (`email`),
   KEY `idNivel` (`idNivel`),
   CONSTRAINT `usuario_web_ibfk_1` FOREIGN KEY (`idNivel`) REFERENCES `nivel` (`idnivel`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1907,7 +1911,7 @@ CREATE TABLE `usuario_web` (
 
 LOCK TABLES `usuario_web` WRITE;
 /*!40000 ALTER TABLE `usuario_web` DISABLE KEYS */;
-INSERT INTO `usuario_web` VALUES (1,'teste@teste','teste',1,'teste'),(2,'sdasd@dsad','igor',2,'igor');
+INSERT INTO `usuario_web` VALUES (1,'teste@teste','teste',1,'teste'),(2,'sdasd@dsad','igor',2,'igor'),(12,'kaio.wesley074@gmail.com','teste',1,'Kaio'),(13,'marcao@marc','a',1,'marcao');
 /*!40000 ALTER TABLE `usuario_web` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1970,6 +1974,74 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Temporary view structure for view `vpendencia_cliente`
+--
+
+DROP TABLE IF EXISTS `vpendencia_cliente`;
+/*!50001 DROP VIEW IF EXISTS `vpendencia_cliente`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8mb4;
+/*!50001 CREATE VIEW `vpendencia_cliente` AS SELECT 
+ 1 AS `idPendencia`,
+ 1 AS `nome`,
+ 1 AS `id`,
+ 1 AS `motivo`,
+ 1 AS `aberto`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `vpendencia_veiculo`
+--
+
+DROP TABLE IF EXISTS `vpendencia_veiculo`;
+/*!50001 DROP VIEW IF EXISTS `vpendencia_veiculo`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8mb4;
+/*!50001 CREATE VIEW `vpendencia_veiculo` AS SELECT 
+ 1 AS `idPendencia`,
+ 1 AS `nome`,
+ 1 AS `id`,
+ 1 AS `motivo`,
+ 1 AS `aberto`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Final view structure for view `vpendencia_cliente`
+--
+
+/*!50001 DROP VIEW IF EXISTS `vpendencia_cliente`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`kliss`@`%` SQL SECURITY DEFINER */
+/*!50001 VIEW `vpendencia_cliente` AS select `p`.`idPendencia_Cliente` AS `idPendencia`,`c`.`nome` AS `nome`,`c`.`idCliente` AS `id`,`p`.`motivo` AS `motivo`,`p`.`aberto` AS `aberto` from (`pendencia_cliente` `p` join `cliente` `c` on((`p`.`idCliente` = `c`.`idCliente`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `vpendencia_veiculo`
+--
+
+/*!50001 DROP VIEW IF EXISTS `vpendencia_veiculo`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`kliss`@`%` SQL SECURITY DEFINER */
+/*!50001 VIEW `vpendencia_veiculo` AS select `pv`.`idPendencia_Veiculo` AS `idPendencia`,concat(`mar`.`nomeMarca`,' ',`m`.`nomeModelo`) AS `nome`,`v`.`idVeiculo` AS `id`,`pv`.`motivo` AS `motivo`,`pv`.`aberto` AS `aberto` from (((`pendencia_veiculo` `pv` join `veiculo` `v` on((`pv`.`idVeiculo` = `v`.`idVeiculo`))) join `modelo` `m` on((`m`.`idModelo` = `v`.`idModelo`))) join `marca` `mar` on((`m`.`idMarca` = `mar`.`idMarca`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -1980,4 +2052,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-11 11:25:45
+-- Dump completed on 2019-04-15 11:26:45
