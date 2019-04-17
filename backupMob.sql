@@ -99,30 +99,6 @@ LOCK TABLES `anuncio_venda_veiculo` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `assunto`
---
-
-DROP TABLE IF EXISTS `assunto`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `assunto` (
-  `idAssunto` int(11) NOT NULL AUTO_INCREMENT,
-  `assunto` varchar(45) NOT NULL,
-  PRIMARY KEY (`idAssunto`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `assunto`
---
-
-LOCK TABLES `assunto` WRITE;
-/*!40000 ALTER TABLE `assunto` DISABLE KEYS */;
-INSERT INTO `assunto` VALUES (1,'Promoção'),(2,'Vendas'),(3,'Aluguel'),(4,'Cadastro de Veiculos');
-/*!40000 ALTER TABLE `assunto` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `avaliacao`
 --
 
@@ -136,7 +112,7 @@ CREATE TABLE `avaliacao` (
   `idLocacao` int(11) NOT NULL,
   PRIMARY KEY (`idAvaliacao`),
   KEY `idLocacao` (`idLocacao`),
-  CONSTRAINT `avaliacao_ibfk_1` FOREIGN KEY (`idLocacao`) REFERENCES `locacao` (`idlocacao`)
+  CONSTRAINT `avaliacao_ibfk_1` FOREIGN KEY (`idLocacao`) REFERENCES `locacao` (`idLocacao`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -333,7 +309,7 @@ CREATE TABLE `cancelamento` (
   PRIMARY KEY (`idCancelamento`),
   KEY `idLocacao` (`idLocacao`),
   KEY `idCliente` (`idCliente`),
-  CONSTRAINT `cancelamento_ibfk_1` FOREIGN KEY (`idLocacao`) REFERENCES `locacao` (`idlocacao`),
+  CONSTRAINT `cancelamento_ibfk_1` FOREIGN KEY (`idLocacao`) REFERENCES `locacao` (`idLocacao`),
   CONSTRAINT `cancelamento_ibfk_2` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idcliente`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -460,7 +436,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (1,'Leonardo','49875265','1970-01-01','54645','A e B','leo@gmail','123',NULL,'2019-04-02'),(4,'Maria','aaaa','1970-01-01','asda','dada','ada','ada',NULL,'1970-01-01');
+INSERT INTO `cliente` VALUES (1,'Leonardo','49875265','1970-01-01','54645','A e B','leonardo_cavalcante.07@hotmail.com','123',NULL,'2019-04-02'),(4,'Maria','aaaa','1970-01-01','asda','dada','kaio.wesley074@gmail.com','ada',NULL,'1970-01-01');
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -724,7 +700,7 @@ CREATE TABLE `conta_pagar_locacao` (
   KEY `idConta_Pagar` (`idConta_Pagar`),
   KEY `idLocacao` (`idLocacao`),
   CONSTRAINT `conta_pagar_locacao_ibfk_1` FOREIGN KEY (`idConta_Pagar`) REFERENCES `conta_pagar` (`idconta_pagar`),
-  CONSTRAINT `conta_pagar_locacao_ibfk_2` FOREIGN KEY (`idLocacao`) REFERENCES `locacao` (`idlocacao`)
+  CONSTRAINT `conta_pagar_locacao_ibfk_2` FOREIGN KEY (`idLocacao`) REFERENCES `locacao` (`idLocacao`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -756,7 +732,7 @@ CREATE TABLE `conta_receber` (
   KEY `idBanco` (`idBanco`),
   KEY `idLocacao` (`idLocacao`),
   CONSTRAINT `conta_receber_ibfk_1` FOREIGN KEY (`idBanco`) REFERENCES `banco` (`idbanco`),
-  CONSTRAINT `conta_receber_ibfk_2` FOREIGN KEY (`idLocacao`) REFERENCES `locacao` (`idlocacao`)
+  CONSTRAINT `conta_receber_ibfk_2` FOREIGN KEY (`idLocacao`) REFERENCES `locacao` (`idLocacao`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -813,7 +789,7 @@ CREATE TABLE `devolucaoveiculo` (
   `confirmLocatario` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`idDevolucaoVeiculo`),
   KEY `idLocacao` (`idLocacao`),
-  CONSTRAINT `devolucaoveiculo_ibfk_1` FOREIGN KEY (`idLocacao`) REFERENCES `locacao` (`idlocacao`)
+  CONSTRAINT `devolucaoveiculo_ibfk_1` FOREIGN KEY (`idLocacao`) REFERENCES `locacao` (`idLocacao`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -999,11 +975,9 @@ CREATE TABLE `fale_conosco` (
   `idFale_Conosco` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
-  `idAssunto` int(11) NOT NULL,
+  `assunto` varchar(100) NOT NULL,
   `mensagem` text NOT NULL,
-  PRIMARY KEY (`idFale_Conosco`),
-  KEY `idAssunto` (`idAssunto`),
-  CONSTRAINT `fale_conosco_ibfk_1` FOREIGN KEY (`idAssunto`) REFERENCES `assunto` (`idassunto`)
+  PRIMARY KEY (`idFale_Conosco`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1141,7 +1115,7 @@ CREATE TABLE `funcionamento` (
   `foto` varchar(45) NOT NULL,
   `ativo` int(11) NOT NULL,
   PRIMARY KEY (`idFuncionamento`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1150,7 +1124,7 @@ CREATE TABLE `funcionamento` (
 
 LOCK TABLES `funcionamento` WRITE;
 /*!40000 ALTER TABLE `funcionamento` DISABLE KEYS */;
-INSERT INTO `funcionamento` VALUES (1,'Como Faço uma Locação','teste','f0096c8e0a05e7c68777699165509a25.png',1),(2,'Como eu me Cadastro','321','7787d26a83ffc742d65f34369d815e06.png',1),(3,'Testando 123','testando321','a2ab03b8bd48777c43d8325f939eee46.png',1),(4,'Testando 123','ighfklgh','0b4e98cd4c3914d5e76b3b08fd3cfd31.png',1),(5,'aaaaaaaaaaa','dasdas','3a1b6316a1c4a8eebb3b3264f5a389fe.png',1);
+INSERT INTO `funcionamento` VALUES (6,'Como Faço uma Locação','aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa','69c2bfc3c0e9ec62928cb87394acbcc3.png',1);
 /*!40000 ALTER TABLE `funcionamento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1253,10 +1227,10 @@ DROP TABLE IF EXISTS `locacao`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `locacao` (
   `idLocacao` int(11) NOT NULL AUTO_INCREMENT,
-  `idSolicitacao_Locador` int(11) NOT NULL,
+  `idSolicitacao_Locacao` int(11) NOT NULL,
   PRIMARY KEY (`idLocacao`),
-  KEY `idSolicitacao_Locador` (`idSolicitacao_Locador`),
-  CONSTRAINT `locacao_ibfk_1` FOREIGN KEY (`idSolicitacao_Locador`) REFERENCES `solicitacao_locacao` (`idsolicitacao_locacao`)
+  KEY `idSolicitacao_Locador` (`idSolicitacao_Locacao`),
+  CONSTRAINT `locacao_ibfk_1` FOREIGN KEY (`idSolicitacao_Locacao`) REFERENCES `solicitacao_locacao` (`idsolicitacao_locacao`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1394,7 +1368,7 @@ CREATE TABLE `parceiro` (
   `email` varchar(50) NOT NULL,
   `ativo` int(11) NOT NULL,
   PRIMARY KEY (`idParceiro`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1403,7 +1377,7 @@ CREATE TABLE `parceiro` (
 
 LOCK TABLES `parceiro` WRITE;
 /*!40000 ALTER TABLE `parceiro` DISABLE KEYS */;
-INSERT INTO `parceiro` VALUES (38,'Kaio Wesley','kakakaakjjjjjjjjjjjjjjjjjjjj','60464d527cb20dbde61602ec3cc3c3fc.png','teste','kaio.algo@gmail.com.br',1),(39,'Kaio Wesley','kakakaakjjjjjjjjjjjjjjjjjjjj','1be024378000451d5013b7e719727abd.png','teste','kaio.algo@gmail.com.br',1),(40,'Kaio Wesley','kakakaakjjjjjjjjjjjjjjjjjjjj','9ff9e3a8770ad60028201fbe7cfe1a68.png','qwe','kaio.algo@gmail.com',1),(41,'dasd','kakakaakjjjjjjjjjjjjjjjjjjjj','10c75c1cacb0711348f25c93cdf01ab1.png','321','kaio.algo@gmail.com',1);
+INSERT INTO `parceiro` VALUES (41,'dasd','77','10c75c1cacb0711348f25c93cdf01ab1.png','321','kaio.algo@gmail.com',1),(42,'Ford','https://www.ford.com.br/','d841c82596337ffd7589d04010abd7e8.png','Ford Motor Company é uma fabricante de automóveis multinacional estadunidense sediada em Dearborn, Michigan, um subúrbio de Detroit. Foi fundada por Henry Ford e incorporada em 16 de junho de 1903.','kaio.wesley074@gmail.com',1);
 /*!40000 ALTER TABLE `parceiro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1596,7 +1570,7 @@ CREATE TABLE `pergunta_frequente` (
 
 LOCK TABLES `pergunta_frequente` WRITE;
 /*!40000 ALTER TABLE `pergunta_frequente` DISABLE KEYS */;
-INSERT INTO `pergunta_frequente` VALUES (21,'EAE','Pergunta no posto Ipiranga',1),(22,'kopç','mklpçk',1),(23,'hvdjlhdvb','asas',1),(24,'Perguntas','Frequentes',0),(25,'Rafael é besta? ','Talvez !',1);
+INSERT INTO `pergunta_frequente` VALUES (24,'Perguntasaaaaaaaaaaaaaaaaaaaaaaaaaa','Frequentes',1),(25,'Rafael é besta? ','Talvez !',1);
 /*!40000 ALTER TABLE `pergunta_frequente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2008,6 +1982,23 @@ SET character_set_client = utf8mb4;
 SET character_set_client = @saved_cs_client;
 
 --
+-- Temporary view structure for view `vvisualizacao_cancelamento`
+--
+
+DROP TABLE IF EXISTS `vvisualizacao_cancelamento`;
+/*!50001 DROP VIEW IF EXISTS `vvisualizacao_cancelamento`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8mb4;
+/*!50001 CREATE VIEW `vvisualizacao_cancelamento` AS SELECT 
+ 1 AS `idCancelamento`,
+ 1 AS `idLocacao`,
+ 1 AS `nome`,
+ 1 AS `idCliente`,
+ 1 AS `confirmacao`,
+ 1 AS `motivo`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Final view structure for view `vpendencia_cliente`
 --
 
@@ -2042,6 +2033,24 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `vvisualizacao_cancelamento`
+--
+
+/*!50001 DROP VIEW IF EXISTS `vvisualizacao_cancelamento`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `vvisualizacao_cancelamento` AS select `c`.`idCancelamento` AS `idCancelamento`,`l`.`idLocacao` AS `idLocacao`,`cl`.`nome` AS `nome`,`cl`.`idCliente` AS `idCliente`,`c`.`confirmacao` AS `confirmacao`,`c`.`motivo` AS `motivo` from (((`cancelamento` `c` join `locacao` `l` on(`l`.`idLocacao`)) join `solicitacao_locacao` `sl` on((`sl`.`idSolicitacao_Locacao` = `l`.`idSolicitacao_Locacao`))) join `cliente` `cl` on((`cl`.`idCliente` = `sl`.`idCliente`))) where isnull(`c`.`confirmacao`) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -2052,4 +2061,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-15 11:26:45
+-- Dump completed on 2019-04-17 11:21:53
