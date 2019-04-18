@@ -57,8 +57,8 @@ CREATE TABLE `acessorio_veiculo` (
   PRIMARY KEY (`idAcessorio_Veiculo`),
   KEY `idVeiculo` (`idVeiculo`),
   KEY `idAcessorio` (`idAcessorio`),
-  CONSTRAINT `acessorio_veiculo_ibfk_1` FOREIGN KEY (`idVeiculo`) REFERENCES `veiculo` (`idveiculo`),
-  CONSTRAINT `acessorio_veiculo_ibfk_2` FOREIGN KEY (`idAcessorio`) REFERENCES `acessorio` (`idacessorio`)
+  CONSTRAINT `acessorio_veiculo_ibfk_1` FOREIGN KEY (`idVeiculo`) REFERENCES `veiculo` (`idveiculo`) ON DELETE CASCADE,
+  CONSTRAINT `acessorio_veiculo_ibfk_2` FOREIGN KEY (`idAcessorio`) REFERENCES `acessorio` (`idacessorio`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -85,7 +85,7 @@ CREATE TABLE `anuncio_venda_veiculo` (
   `observacao` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`idAnuncio_Venda_Veiculo`),
   KEY `idVeiculo` (`idVeiculo`),
-  CONSTRAINT `anuncio_venda_veiculo_ibfk_1` FOREIGN KEY (`idVeiculo`) REFERENCES `veiculo` (`idveiculo`)
+  CONSTRAINT `anuncio_venda_veiculo_ibfk_1` FOREIGN KEY (`idVeiculo`) REFERENCES `veiculo` (`idveiculo`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -112,7 +112,7 @@ CREATE TABLE `avaliacao` (
   `idLocacao` int(11) NOT NULL,
   PRIMARY KEY (`idAvaliacao`),
   KEY `idLocacao` (`idLocacao`),
-  CONSTRAINT `avaliacao_ibfk_1` FOREIGN KEY (`idLocacao`) REFERENCES `locacao` (`idLocacao`)
+  CONSTRAINT `avaliacao_ibfk_1` FOREIGN KEY (`idLocacao`) REFERENCES `locacao` (`idlocacao`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -139,8 +139,8 @@ CREATE TABLE `avaliacao_cliente` (
   PRIMARY KEY (`idAvaliacao_Cliente`),
   KEY `idCliente` (`idCliente`),
   KEY `idAvaliacao` (`idAvaliacao`),
-  CONSTRAINT `avaliacao_cliente_ibfk_1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idcliente`),
-  CONSTRAINT `avaliacao_cliente_ibfk_2` FOREIGN KEY (`idAvaliacao`) REFERENCES `avaliacao` (`idavaliacao`)
+  CONSTRAINT `avaliacao_cliente_ibfk_1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idcliente`) ON DELETE CASCADE,
+  CONSTRAINT `avaliacao_cliente_ibfk_2` FOREIGN KEY (`idAvaliacao`) REFERENCES `avaliacao` (`idavaliacao`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -309,7 +309,7 @@ CREATE TABLE `cancelamento` (
   PRIMARY KEY (`idCancelamento`),
   KEY `idLocacao` (`idLocacao`),
   KEY `idCliente` (`idCliente`),
-  CONSTRAINT `cancelamento_ibfk_1` FOREIGN KEY (`idLocacao`) REFERENCES `locacao` (`idLocacao`),
+  CONSTRAINT `cancelamento_ibfk_1` FOREIGN KEY (`idLocacao`) REFERENCES `locacao` (`idlocacao`),
   CONSTRAINT `cancelamento_ibfk_2` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idcliente`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -471,8 +471,8 @@ CREATE TABLE `cliente_endereco` (
   PRIMARY KEY (`idCliente_Endereco`),
   KEY `idCliente` (`idCliente`),
   KEY `idEndereco` (`idEndereco`),
-  CONSTRAINT `cliente_endereco_ibfk_1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idcliente`),
-  CONSTRAINT `cliente_endereco_ibfk_2` FOREIGN KEY (`idEndereco`) REFERENCES `endereco` (`idendereco`)
+  CONSTRAINT `cliente_endereco_ibfk_1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idcliente`) ON DELETE CASCADE,
+  CONSTRAINT `cliente_endereco_ibfk_2` FOREIGN KEY (`idEndereco`) REFERENCES `endereco` (`idendereco`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -499,8 +499,8 @@ CREATE TABLE `cliente_telefone` (
   PRIMARY KEY (`idCliente_Telefone`),
   KEY `idTelefone` (`idTelefone`),
   KEY `idCliente` (`idCliente`),
-  CONSTRAINT `cliente_telefone_ibfk_1` FOREIGN KEY (`idTelefone`) REFERENCES `telefone` (`idtelefone`),
-  CONSTRAINT `cliente_telefone_ibfk_2` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idcliente`)
+  CONSTRAINT `cliente_telefone_ibfk_1` FOREIGN KEY (`idTelefone`) REFERENCES `telefone` (`idtelefone`) ON DELETE CASCADE,
+  CONSTRAINT `cliente_telefone_ibfk_2` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idcliente`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -700,7 +700,7 @@ CREATE TABLE `conta_pagar_locacao` (
   KEY `idConta_Pagar` (`idConta_Pagar`),
   KEY `idLocacao` (`idLocacao`),
   CONSTRAINT `conta_pagar_locacao_ibfk_1` FOREIGN KEY (`idConta_Pagar`) REFERENCES `conta_pagar` (`idconta_pagar`),
-  CONSTRAINT `conta_pagar_locacao_ibfk_2` FOREIGN KEY (`idLocacao`) REFERENCES `locacao` (`idLocacao`)
+  CONSTRAINT `conta_pagar_locacao_ibfk_2` FOREIGN KEY (`idLocacao`) REFERENCES `locacao` (`idlocacao`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -732,7 +732,7 @@ CREATE TABLE `conta_receber` (
   KEY `idBanco` (`idBanco`),
   KEY `idLocacao` (`idLocacao`),
   CONSTRAINT `conta_receber_ibfk_1` FOREIGN KEY (`idBanco`) REFERENCES `banco` (`idbanco`),
-  CONSTRAINT `conta_receber_ibfk_2` FOREIGN KEY (`idLocacao`) REFERENCES `locacao` (`idLocacao`)
+  CONSTRAINT `conta_receber_ibfk_2` FOREIGN KEY (`idLocacao`) REFERENCES `locacao` (`idlocacao`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -789,7 +789,7 @@ CREATE TABLE `devolucaoveiculo` (
   `confirmLocatario` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`idDevolucaoVeiculo`),
   KEY `idLocacao` (`idLocacao`),
-  CONSTRAINT `devolucaoveiculo_ibfk_1` FOREIGN KEY (`idLocacao`) REFERENCES `locacao` (`idLocacao`)
+  CONSTRAINT `devolucaoveiculo_ibfk_1` FOREIGN KEY (`idLocacao`) REFERENCES `locacao` (`idlocacao`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -978,7 +978,7 @@ CREATE TABLE `fale_conosco` (
   `assunto` varchar(100) NOT NULL,
   `mensagem` text NOT NULL,
   PRIMARY KEY (`idFale_Conosco`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -987,6 +987,7 @@ CREATE TABLE `fale_conosco` (
 
 LOCK TABLES `fale_conosco` WRITE;
 /*!40000 ALTER TABLE `fale_conosco` DISABLE KEYS */;
+INSERT INTO `fale_conosco` VALUES (6,'Sarah','Sarah@lli','Sarah teste','Sarah teste\r\nSarah teste\r\nSarah teste\r\nSarah teste\r\nSarah teste\r\nSarah teste'),(8,'Sarah','Sarah@465','Sarah teste','Sarah teste\r\nSarah teste\r\nSarah teste\r\nSarah teste\r\nSarah teste\r\nSarah teste'),(10,'Leonardo ','Leo@toxakkkk','Qe Bosta','kkkkkkkkkkkkkkkkkkkkkkk');
 /*!40000 ALTER TABLE `fale_conosco` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1087,7 +1088,7 @@ CREATE TABLE `foto_veiculo` (
   `perfil` varchar(20) NOT NULL,
   PRIMARY KEY (`idFoto_Veiculo`),
   KEY `idVeiculo` (`idVeiculo`),
-  CONSTRAINT `foto_veiculo_ibfk_1` FOREIGN KEY (`idVeiculo`) REFERENCES `veiculo` (`idveiculo`)
+  CONSTRAINT `foto_veiculo_ibfk_1` FOREIGN KEY (`idVeiculo`) REFERENCES `veiculo` (`idveiculo`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1097,7 +1098,7 @@ CREATE TABLE `foto_veiculo` (
 
 LOCK TABLES `foto_veiculo` WRITE;
 /*!40000 ALTER TABLE `foto_veiculo` DISABLE KEYS */;
-INSERT INTO `foto_veiculo` VALUES (1,2,'carro.jpeg','frontal'),(2,3,'motoHonda.jpg','frontal'),(3,4,'motoTransalp.jpg','frontal'),(4,1,'carroUno.jpg','frontal');
+INSERT INTO `foto_veiculo` VALUES (1,2,'carro.jpeg','frontal'),(2,3,'motoHonda.jpg','frontal'),(4,1,'carroUno.jpg','frontal');
 /*!40000 ALTER TABLE `foto_veiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1377,7 +1378,7 @@ CREATE TABLE `parceiro` (
 
 LOCK TABLES `parceiro` WRITE;
 /*!40000 ALTER TABLE `parceiro` DISABLE KEYS */;
-INSERT INTO `parceiro` VALUES (41,'dasd','77','10c75c1cacb0711348f25c93cdf01ab1.png','321','kaio.algo@gmail.com',1),(42,'Ford','https://www.ford.com.br/','d841c82596337ffd7589d04010abd7e8.png','Ford Motor Company é uma fabricante de automóveis multinacional estadunidense sediada em Dearborn, Michigan, um subúrbio de Detroit. Foi fundada por Henry Ford e incorporada em 16 de junho de 1903.','kaio.wesley074@gmail.com',1);
+INSERT INTO `parceiro` VALUES (42,'Ford','https://www.ford.com.br/','d841c82596337ffd7589d04010abd7e8.png','Ford Motor Company é uma fabricante de automóveis multinacional estadunidense sediada em Dearborn, Michigan, um subúrbio de Detroit. Foi fundada por Henry Ford e incorporada em 16 de junho de 1903.','kaio.wesley074@gmail.com',1);
 /*!40000 ALTER TABLE `parceiro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1506,7 +1507,7 @@ CREATE TABLE `pendencia_cliente` (
   `aberto` tinyint(4) DEFAULT '1',
   PRIMARY KEY (`idPendencia_Cliente`),
   KEY `idCliente` (`idCliente`),
-  CONSTRAINT `pendencia_cliente_ibfk_1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idcliente`)
+  CONSTRAINT `pendencia_cliente_ibfk_1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idcliente`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1534,7 +1535,7 @@ CREATE TABLE `pendencia_veiculo` (
   `aberto` tinyint(4) DEFAULT '1',
   PRIMARY KEY (`idPendencia_Veiculo`),
   KEY `idVeiculo` (`idVeiculo`),
-  CONSTRAINT `pendencia_veiculo_ibfk_1` FOREIGN KEY (`idVeiculo`) REFERENCES `veiculo` (`idveiculo`)
+  CONSTRAINT `pendencia_veiculo_ibfk_1` FOREIGN KEY (`idVeiculo`) REFERENCES `veiculo` (`idveiculo`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1561,7 +1562,7 @@ CREATE TABLE `pergunta_frequente` (
   `resposta` text,
   `ativo` tinyint(4) NOT NULL,
   PRIMARY KEY (`idPergunta`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1570,7 +1571,7 @@ CREATE TABLE `pergunta_frequente` (
 
 LOCK TABLES `pergunta_frequente` WRITE;
 /*!40000 ALTER TABLE `pergunta_frequente` DISABLE KEYS */;
-INSERT INTO `pergunta_frequente` VALUES (24,'Perguntasaaaaaaaaaaaaaaaaaaaaaaaaaa','Frequentes',1),(25,'Rafael é besta? ','Talvez !',1);
+INSERT INTO `pergunta_frequente` VALUES (26,'hvdjlhdvb','asas',1),(28,'EU sou burro?','Frequentes',0);
 /*!40000 ALTER TABLE `pergunta_frequente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1928,7 +1929,7 @@ CREATE TABLE `veiculo` (
 
 LOCK TABLES `veiculo` WRITE;
 /*!40000 ALTER TABLE `veiculo` DISABLE KEYS */;
-INSERT INTO `veiculo` VALUES (1,1,1,'vermelho',2,1,1,5,1999,50000,80000,1,1),(2,2,1,'preto',2,1,2,10,2000,0,100000,1,3),(3,3,1,'vermelho',2,1,1,50,2017,0,800000,1,1),(4,3,1,'amarelo',2,2,2,10,2010,50000,20000,1,1),(6,3,1,'torto',2,2,2,10,2010,5000,2000,1,1);
+INSERT INTO `veiculo` VALUES (1,1,1,'vermelho',2,1,1,5,1999,50000,80000,1,1),(2,2,1,'preto',2,1,2,10,2000,0,100000,1,3),(3,3,1,'vermelho',2,1,1,50,2017,0,800000,1,1),(6,3,1,'torto',2,2,2,10,2010,5000,2000,1,1);
 /*!40000 ALTER TABLE `veiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -2061,4 +2062,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-17 11:21:53
+-- Dump completed on 2019-04-18 11:21:40
