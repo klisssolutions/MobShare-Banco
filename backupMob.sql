@@ -978,7 +978,7 @@ CREATE TABLE `fale_conosco` (
   `assunto` varchar(100) NOT NULL,
   `mensagem` text NOT NULL,
   PRIMARY KEY (`idFale_Conosco`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -987,7 +987,7 @@ CREATE TABLE `fale_conosco` (
 
 LOCK TABLES `fale_conosco` WRITE;
 /*!40000 ALTER TABLE `fale_conosco` DISABLE KEYS */;
-INSERT INTO `fale_conosco` VALUES (6,'Sarah','Sarah@lli','Sarah teste','Sarah teste\r\nSarah teste\r\nSarah teste\r\nSarah teste\r\nSarah teste\r\nSarah teste'),(8,'Sarah','Sarah@465','Sarah teste','Sarah teste\r\nSarah teste\r\nSarah teste\r\nSarah teste\r\nSarah teste\r\nSarah teste'),(10,'Leonardo ','Leo@toxakkkk','Qe Bosta','kkkkkkkkkkkkkkkkkkkkkkk');
+INSERT INTO `fale_conosco` VALUES (11,'Sarah','Sara@oliveira','Reclamação ','Não Aguento mais essa merda desse tcc '),(15,'Kaio','Kaio@gmail.com','Critíca','Vocês deveriam tirar o Tcc\r\n'),(16,'Leonardo ','Leo@Outlook.com','Sugestão','Vocês deveriam tirar o Tcc Por Favor!\r\n'),(17,'Igor','igor@hotmail.com','Sugestão','Vocês deveriam tirar o Tcc Por Favor!\r\nEu quero muito isso !!'),(18,'Emanuelly','emanuelly@bol.com.br','Sugestão','Quero mais Tcc! :)\r\n#ÉVerdadeEsseBilhete');
 /*!40000 ALTER TABLE `fale_conosco` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1562,7 +1562,7 @@ CREATE TABLE `pergunta_frequente` (
   `resposta` text,
   `ativo` tinyint(4) NOT NULL,
   PRIMARY KEY (`idPergunta`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1571,7 +1571,7 @@ CREATE TABLE `pergunta_frequente` (
 
 LOCK TABLES `pergunta_frequente` WRITE;
 /*!40000 ALTER TABLE `pergunta_frequente` DISABLE KEYS */;
-INSERT INTO `pergunta_frequente` VALUES (26,'hvdjlhdvb','asas',1),(28,'EU sou burro?','Frequentes',0);
+INSERT INTO `pergunta_frequente` VALUES (30,'Ele é Oi?','Claro que não!',1),(31,'Esse Site Funciona ?','Deveria, tudo depene do usuário ',1);
 /*!40000 ALTER TABLE `pergunta_frequente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1734,7 +1734,7 @@ CREATE TABLE `solicitacao_locacao` (
 
 LOCK TABLES `solicitacao_locacao` WRITE;
 /*!40000 ALTER TABLE `solicitacao_locacao` DISABLE KEYS */;
-INSERT INTO `solicitacao_locacao` VALUES (1,4,1,1,'2019-04-15 00:00:00','2019-04-15 00:00:00',NULL);
+INSERT INTO `solicitacao_locacao` VALUES (1,4,1,1,'2019-04-15 10:00:00','2019-04-15 16:00:00',NULL);
 /*!40000 ALTER TABLE `solicitacao_locacao` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1891,6 +1891,24 @@ INSERT INTO `usuario_web` VALUES (1,'teste@teste','teste',1,'teste'),(2,'sdasd@d
 UNLOCK TABLES;
 
 --
+-- Temporary view structure for view `v_detalhes_locacao`
+--
+
+DROP TABLE IF EXISTS `v_detalhes_locacao`;
+/*!50001 DROP VIEW IF EXISTS `v_detalhes_locacao`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8mb4;
+/*!50001 CREATE VIEW `v_detalhes_locacao` AS SELECT 
+ 1 AS `ID locação`,
+ 1 AS `Locatário`,
+ 1 AS `Locador`,
+ 1 AS `Veiculo`,
+ 1 AS `Inicio`,
+ 1 AS `Fim`,
+ 1 AS `Valor total`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Table structure for table `veiculo`
 --
 
@@ -2000,6 +2018,24 @@ SET character_set_client = utf8mb4;
 SET character_set_client = @saved_cs_client;
 
 --
+-- Final view structure for view `v_detalhes_locacao`
+--
+
+/*!50001 DROP VIEW IF EXISTS `v_detalhes_locacao`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `v_detalhes_locacao` AS select `l`.`idLocacao` AS `ID locação`,`cl`.`nome` AS `Locatário`,`cl2`.`nome` AS `Locador`,concat(`ma`.`nomeMarca`,' ',`mo`.`nomeModelo`) AS `Veiculo`,`sl`.`horarioInicio` AS `Inicio`,`sl`.`horarioFim` AS `Fim`,(`v`.`valorHora` * ceiling(((select timestampdiff(MINUTE,`solicitacao_locacao`.`horarioInicio`,`solicitacao_locacao`.`horarioFim`) from `solicitacao_locacao` where (`solicitacao_locacao`.`idSolicitacao_Locacao` = 1)) / 60))) AS `Valor total` from ((((((`solicitacao_locacao` `sl` join `cliente` `cl` on((`sl`.`idCliente` = `cl`.`idCliente`))) join `veiculo` `v` on((`v`.`idVeiculo` = `sl`.`idVeiculo`))) join `cliente` `cl2` on((`cl2`.`idCliente` = `v`.`idCliente`))) join `locacao` `l` on((`l`.`idSolicitacao_Locacao` = `sl`.`idSolicitacao_Locacao`))) join `modelo` `mo` on((`mo`.`idModelo` = `v`.`idModelo`))) join `marca` `ma` on((`ma`.`idMarca` = `mo`.`idMarca`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
 -- Final view structure for view `vpendencia_cliente`
 --
 
@@ -2062,4 +2098,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-18 11:21:40
+-- Dump completed on 2019-04-22 11:29:27
