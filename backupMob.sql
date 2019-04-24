@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.11, for Win64 (x86_64)
 --
--- Host: localhost    Database: mydb
+-- Host: 10.107.144.16    Database: mydb
 -- ------------------------------------------------------
 -- Server version	8.0.11
 
@@ -2018,6 +2018,10 @@ SET character_set_client = utf8mb4;
 SET character_set_client = @saved_cs_client;
 
 --
+-- Dumping routines for database 'mydb'
+--
+
+--
 -- Final view structure for view `v_detalhes_locacao`
 --
 
@@ -2098,4 +2102,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-22 11:29:27
+-- Dump completed on 2019-04-24  8:23:04
