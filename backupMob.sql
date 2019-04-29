@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.11, for Win64 (x86_64)
 --
--- Host: 10.107.144.16    Database: mydb
+-- Host: localhost    Database: mydb
 -- ------------------------------------------------------
 -- Server version	8.0.11
 
@@ -289,7 +289,7 @@ CREATE TABLE `banner` (
 
 LOCK TABLES `banner` WRITE;
 /*!40000 ALTER TABLE `banner` DISABLE KEYS */;
-INSERT INTO `banner` VALUES (4,'teste','8a510334d2a0a572eca9574a45e7d867.png','bnjkb','kjbjk','jkbjkb',1),(5,'qaaa','4f0b6edcec6c00b35c7a7a791602f425.png','sdfsdfds','sdfsdf','aaaa',1);
+INSERT INTO `banner` VALUES (4,'teste','8a510334d2a0a572eca9574a45e7d867.png','bnjkbasdasssssssssssssssssssssssssssssssssssssssssssssssssssasdddddddddddddddddddddddddddddddddddddddddddddddddddsssaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwfaEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEs','kjbjk','jkbjkb',1),(5,'qaaa','4f0b6edcec6c00b35c7a7a791602f425.png','dasasasas','sdfsdf','aaaa',1);
 /*!40000 ALTER TABLE `banner` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -320,7 +320,7 @@ CREATE TABLE `cancelamento` (
 
 LOCK TABLES `cancelamento` WRITE;
 /*!40000 ALTER TABLE `cancelamento` DISABLE KEYS */;
-INSERT INTO `cancelamento` VALUES (1,1,4,NULL,'A inteligência artificial é um ramo de pesquisa da ciência da computação que busca, através de símbolos computacionais, construir mecanismos e/ou dispositivos que simulem a capacidade do ser humano de pensar, resolver problemas, ou seja, de ser inteligente. O estudo e desenvolvimento desse ramo de pesquisa tiveram início na Segunda Guerra Mundial.');
+INSERT INTO `cancelamento` VALUES (1,1,4,1,'A inteligência artificial é um ramo de pesquisa da ciência da computação que busca, através de símbolos computacionais, construir mecanismos e/ou dispositivos que simulem a capacidade do ser humano de pensar, resolver problemas, ou seja, de ser inteligente. O estudo e desenvolvimento desse ramo de pesquisa tiveram início na Segunda Guerra Mundial.');
 /*!40000 ALTER TABLE `cancelamento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -418,7 +418,7 @@ CREATE TABLE `cliente` (
   `idCliente` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(45) NOT NULL,
   `cpf` varchar(45) NOT NULL,
-  `dtNasc` date NOT NULL,
+  `dtNasc` date DEFAULT NULL,
   `cnh` varchar(45) DEFAULT NULL,
   `categoriaCnh` varchar(45) DEFAULT NULL,
   `email` varchar(45) NOT NULL,
@@ -427,7 +427,7 @@ CREATE TABLE `cliente` (
   `dataCadastro` date NOT NULL,
   PRIMARY KEY (`idCliente`),
   UNIQUE KEY `cpf_UNIQUE` (`cpf`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -436,7 +436,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (1,'Leonardo','49875265','1970-01-01','54645','A e B','leonardo_cavalcante.07@hotmail.com','123',NULL,'2019-04-02'),(4,'Maria','aaaa','1970-01-01','asda','dada','kaio.wesley074@gmail.com','ada',NULL,'1970-01-01');
+INSERT INTO `cliente` VALUES (1,'Leonardo','49875265','1970-01-01','54645','A e B','leonardo_cavalcante.07@hotmail.com','123',NULL,'2019-04-02'),(4,'Maria','aaaa','1970-01-01','asda','dada','kaio.wesley074@gmail.com','ada',NULL,'1970-01-01'),(5,'João','5413',NULL,'25452','A','joao@uol','321',NULL,'2019-04-02'),(19,'teste','teste',NULL,'TESTE','a','teste','teste',NULL,'2019-04-02'),(20,'TESTE','TEST',NULL,'TES','A','TEST','TESTE',NULL,'2019-04-02'),(21,'MARIO','jhnvgjh',NULL,'nbv nb ','hnvhn','MARIO','123',NULL,'2019-04-02');
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -1508,7 +1508,7 @@ CREATE TABLE `pendencia_cliente` (
   PRIMARY KEY (`idPendencia_Cliente`),
   KEY `idCliente` (`idCliente`),
   CONSTRAINT `pendencia_cliente_ibfk_1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idcliente`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1517,7 +1517,7 @@ CREATE TABLE `pendencia_cliente` (
 
 LOCK TABLES `pendencia_cliente` WRITE;
 /*!40000 ALTER TABLE `pendencia_cliente` DISABLE KEYS */;
-INSERT INTO `pendencia_cliente` VALUES (1,4,'Aguardando aprovação',1);
+INSERT INTO `pendencia_cliente` VALUES (1,4,'Aguardando aprovação',1),(2,5,'Aguardando aprovação',1),(12,19,'Aguardando aprovação',1),(13,20,'Aguardando aprovação',1),(14,21,'Aguardando aprovação',1);
 /*!40000 ALTER TABLE `pendencia_cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1909,6 +1909,21 @@ SET character_set_client = utf8mb4;
 SET character_set_client = @saved_cs_client;
 
 --
+-- Temporary view structure for view `vanuncios_mobile`
+--
+
+DROP TABLE IF EXISTS `vanuncios_mobile`;
+/*!50001 DROP VIEW IF EXISTS `vanuncios_mobile`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8mb4;
+/*!50001 CREATE VIEW `vanuncios_mobile` AS SELECT 
+ 1 AS `idVeiculo`,
+ 1 AS `nomeModelo`,
+ 1 AS `nomeMarca`,
+ 1 AS `fotoVeiculo`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Table structure for table `veiculo`
 --
 
@@ -2018,10 +2033,6 @@ SET character_set_client = utf8mb4;
 SET character_set_client = @saved_cs_client;
 
 --
--- Dumping routines for database 'mydb'
---
-
---
 -- Final view structure for view `v_detalhes_locacao`
 --
 
@@ -2035,6 +2046,24 @@ SET character_set_client = @saved_cs_client;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `v_detalhes_locacao` AS select `l`.`idLocacao` AS `ID locação`,`cl`.`nome` AS `Locatário`,`cl2`.`nome` AS `Locador`,concat(`ma`.`nomeMarca`,' ',`mo`.`nomeModelo`) AS `Veiculo`,`sl`.`horarioInicio` AS `Inicio`,`sl`.`horarioFim` AS `Fim`,(`v`.`valorHora` * ceiling(((select timestampdiff(MINUTE,`solicitacao_locacao`.`horarioInicio`,`solicitacao_locacao`.`horarioFim`) from `solicitacao_locacao` where (`solicitacao_locacao`.`idSolicitacao_Locacao` = 1)) / 60))) AS `Valor total` from ((((((`solicitacao_locacao` `sl` join `cliente` `cl` on((`sl`.`idCliente` = `cl`.`idCliente`))) join `veiculo` `v` on((`v`.`idVeiculo` = `sl`.`idVeiculo`))) join `cliente` `cl2` on((`cl2`.`idCliente` = `v`.`idCliente`))) join `locacao` `l` on((`l`.`idSolicitacao_Locacao` = `sl`.`idSolicitacao_Locacao`))) join `modelo` `mo` on((`mo`.`idModelo` = `v`.`idModelo`))) join `marca` `ma` on((`ma`.`idMarca` = `mo`.`idMarca`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `vanuncios_mobile`
+--
+
+/*!50001 DROP VIEW IF EXISTS `vanuncios_mobile`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`kliss`@`%` SQL SECURITY DEFINER */
+/*!50001 VIEW `vanuncios_mobile` AS select `v`.`idVeiculo` AS `idVeiculo`,`mo`.`nomeModelo` AS `nomeModelo`,`ma`.`nomeMarca` AS `nomeMarca`,`ft`.`fotoVeiculo` AS `fotoVeiculo` from (((`veiculo` `v` join `modelo` `mo` on((`v`.`idModelo` = `mo`.`idModelo`))) join `marca` `ma` on((`ma`.`idMarca` = `mo`.`idMarca`))) join `foto_veiculo` `ft` on((`ft`.`idVeiculo` = `v`.`idVeiculo`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -2102,4 +2131,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-24  8:23:04
+-- Dump completed on 2019-04-29 11:26:09
