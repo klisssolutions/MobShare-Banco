@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.11, for Win64 (x86_64)
 --
--- Host: localhost    Database: mydb
+-- Host: 10.107.144.16    Database: mydb
 -- ------------------------------------------------------
 -- Server version	8.0.11
 
@@ -978,7 +978,7 @@ CREATE TABLE `fale_conosco` (
   `assunto` varchar(100) NOT NULL,
   `mensagem` text NOT NULL,
   PRIMARY KEY (`idFale_Conosco`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -987,7 +987,7 @@ CREATE TABLE `fale_conosco` (
 
 LOCK TABLES `fale_conosco` WRITE;
 /*!40000 ALTER TABLE `fale_conosco` DISABLE KEYS */;
-INSERT INTO `fale_conosco` VALUES (11,'Sarah','Sara@oliveira','Reclamação ','Não Aguento mais essa merda desse tcc '),(15,'Kaio','Kaio@gmail.com','Critíca','Vocês deveriam tirar o Tcc\r\n'),(16,'Leonardo ','Leo@Outlook.com','Sugestão','Vocês deveriam tirar o Tcc Por Favor!\r\n'),(17,'Igor','igor@hotmail.com','Sugestão','Vocês deveriam tirar o Tcc Por Favor!\r\nEu quero muito isso !!'),(18,'Emanuelly','emanuelly@bol.com.br','Sugestão','Quero mais Tcc! :)\r\n#ÉVerdadeEsseBilhete');
+INSERT INTO `fale_conosco` VALUES (15,'Kaio','Kaio@gmail.com','Critíca','Vocês deveriam tirar o Tcc\r\n'),(16,'Leonardo ','Leo@Outlook.com','Sugestão','Vocês deveriam tirar o Tcc Por Favor!\r\n'),(17,'Igor','igor@hotmail.com','Sugestão','Vocês deveriam tirar o Tcc Por Favor!\r\nEu quero muito isso !!'),(18,'Emanuelly','emanuelly@bol.com.br','Sugestão','Quero mais Tcc! :)\r\n#ÉVerdadeEsseBilhete'),(19,'Sarah','kaio.algo@gmail.com','Sugestão','sdghfkduyhfli'),(20,'Leonardo ','Leo@Outlook.com','Sugestão','dddddddddd');
 /*!40000 ALTER TABLE `fale_conosco` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1116,7 +1116,7 @@ CREATE TABLE `funcionamento` (
   `foto` varchar(45) NOT NULL,
   `ativo` int(11) NOT NULL,
   PRIMARY KEY (`idFuncionamento`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1125,7 +1125,7 @@ CREATE TABLE `funcionamento` (
 
 LOCK TABLES `funcionamento` WRITE;
 /*!40000 ALTER TABLE `funcionamento` DISABLE KEYS */;
-INSERT INTO `funcionamento` VALUES (6,'Como Faço uma Locação','aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa','69c2bfc3c0e9ec62928cb87394acbcc3.png',1);
+INSERT INTO `funcionamento` VALUES (6,'Como Faço uma Locação','aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa','69c2bfc3c0e9ec62928cb87394acbcc3.png',1),(7,'Como eu me Cadastro','ooooooooooooooo','c82ceb1f8c44127e6f31ca5db94fae5d.png',1);
 /*!40000 ALTER TABLE `funcionamento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1349,7 +1349,7 @@ CREATE TABLE `nivel` (
 
 LOCK TABLES `nivel` WRITE;
 /*!40000 ALTER TABLE `nivel` DISABLE KEYS */;
-INSERT INTO `nivel` VALUES (1,'Administrador','Controla tudo',127),(2,'Marketing','Controla e-mail',32),(4,'teste','123456',80);
+INSERT INTO `nivel` VALUES (1,'Administrador','Controla tudo',127),(2,'Marketing','Controla e-mail',127),(4,'teste','123456',80);
 /*!40000 ALTER TABLE `nivel` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1369,7 +1369,7 @@ CREATE TABLE `parceiro` (
   `email` varchar(50) NOT NULL,
   `ativo` int(11) NOT NULL,
   PRIMARY KEY (`idParceiro`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1378,7 +1378,7 @@ CREATE TABLE `parceiro` (
 
 LOCK TABLES `parceiro` WRITE;
 /*!40000 ALTER TABLE `parceiro` DISABLE KEYS */;
-INSERT INTO `parceiro` VALUES (42,'Ford','https://www.ford.com.br/','d841c82596337ffd7589d04010abd7e8.png','Ford Motor Company é uma fabricante de automóveis multinacional estadunidense sediada em Dearborn, Michigan, um subúrbio de Detroit. Foi fundada por Henry Ford e incorporada em 16 de junho de 1903.','kaio.wesley074@gmail.com',1);
+INSERT INTO `parceiro` VALUES (42,'Ford','https://www.ford.com.br/','d841c82596337ffd7589d04010abd7e8.png','Ford Motor Company é uma fabricante de automóveis multinacional estadunidense sediada em Dearborn, Michigan, um subúrbio de Detroit. Foi fundada por Henry Ford e incorporada em 16 de junho de 1903.','kaio.wesley074@gmail.com',1),(43,'Sarah Alguma coisa','kakakaakjjjjjjjjjjjjjjjjjjjj','1c8deede837fdbbf163f672d1255eb1c.png','teste','kaio.algo@gmail.com',1);
 /*!40000 ALTER TABLE `parceiro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1571,7 +1571,7 @@ CREATE TABLE `pergunta_frequente` (
 
 LOCK TABLES `pergunta_frequente` WRITE;
 /*!40000 ALTER TABLE `pergunta_frequente` DISABLE KEYS */;
-INSERT INTO `pergunta_frequente` VALUES (30,'Ele é Oi?','Claro que não!',1),(31,'Esse Site Funciona ?','Deveria, tudo depene do usuário ',1);
+INSERT INTO `pergunta_frequente` VALUES (30,'Para Alugar tenho que Ter um cadastro?','Claro que Sim!',1),(31,'Esse Site Funciona ?','Deveria, tudo depende do usuário. ',1);
 /*!40000 ALTER TABLE `pergunta_frequente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1924,6 +1924,22 @@ SET character_set_client = utf8mb4;
 SET character_set_client = @saved_cs_client;
 
 --
+-- Temporary view structure for view `vavaliacao_veiculo`
+--
+
+DROP TABLE IF EXISTS `vavaliacao_veiculo`;
+/*!50001 DROP VIEW IF EXISTS `vavaliacao_veiculo`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8mb4;
+/*!50001 CREATE VIEW `vavaliacao_veiculo` AS SELECT 
+ 1 AS `idVeiculo`,
+ 1 AS `nomeModelo`,
+ 1 AS `nomeMarca`,
+ 1 AS `depoimento`,
+ 1 AS `nota`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Table structure for table `veiculo`
 --
 
@@ -2033,6 +2049,10 @@ SET character_set_client = utf8mb4;
 SET character_set_client = @saved_cs_client;
 
 --
+-- Dumping routines for database 'mydb'
+--
+
+--
 -- Final view structure for view `v_detalhes_locacao`
 --
 
@@ -2044,7 +2064,6 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `v_detalhes_locacao` AS select `l`.`idLocacao` AS `ID locação`,`cl`.`nome` AS `Locatário`,`cl2`.`nome` AS `Locador`,concat(`ma`.`nomeMarca`,' ',`mo`.`nomeModelo`) AS `Veiculo`,`sl`.`horarioInicio` AS `Inicio`,`sl`.`horarioFim` AS `Fim`,(`v`.`valorHora` * ceiling(((select timestampdiff(MINUTE,`solicitacao_locacao`.`horarioInicio`,`solicitacao_locacao`.`horarioFim`) from `solicitacao_locacao` where (`solicitacao_locacao`.`idSolicitacao_Locacao` = 1)) / 60))) AS `Valor total` from ((((((`solicitacao_locacao` `sl` join `cliente` `cl` on((`sl`.`idCliente` = `cl`.`idCliente`))) join `veiculo` `v` on((`v`.`idVeiculo` = `sl`.`idVeiculo`))) join `cliente` `cl2` on((`cl2`.`idCliente` = `v`.`idCliente`))) join `locacao` `l` on((`l`.`idSolicitacao_Locacao` = `sl`.`idSolicitacao_Locacao`))) join `modelo` `mo` on((`mo`.`idModelo` = `v`.`idModelo`))) join `marca` `ma` on((`ma`.`idMarca` = `mo`.`idMarca`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -2062,8 +2081,24 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`kliss`@`%` SQL SECURITY DEFINER */
 /*!50001 VIEW `vanuncios_mobile` AS select `v`.`idVeiculo` AS `idVeiculo`,`mo`.`nomeModelo` AS `nomeModelo`,`ma`.`nomeMarca` AS `nomeMarca`,`ft`.`fotoVeiculo` AS `fotoVeiculo` from (((`veiculo` `v` join `modelo` `mo` on((`v`.`idModelo` = `mo`.`idModelo`))) join `marca` `ma` on((`ma`.`idMarca` = `mo`.`idMarca`))) join `foto_veiculo` `ft` on((`ft`.`idVeiculo` = `v`.`idVeiculo`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `vavaliacao_veiculo`
+--
+
+/*!50001 DROP VIEW IF EXISTS `vavaliacao_veiculo`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50001 VIEW `vavaliacao_veiculo` AS select `v`.`idVeiculo` AS `idVeiculo`,`mo`.`nomeModelo` AS `nomeModelo`,`ma`.`nomeMarca` AS `nomeMarca`,`a`.`depoimento` AS `depoimento`,`a`.`nota` AS `nota` from ((((`avaliacao_veiculo` `av` join `veiculo` `v` on((`v`.`idVeiculo` = `av`.`idVeiculo`))) join `modelo` `mo` on((`v`.`idModelo` = `mo`.`idModelo`))) join `marca` `ma` on((`mo`.`idMarca` = `ma`.`idMarca`))) join `avaliacao` `a` on((`a`.`idAvaliacao` = `av`.`idAvaliacao`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -2080,7 +2115,6 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`kliss`@`%` SQL SECURITY DEFINER */
 /*!50001 VIEW `vpendencia_cliente` AS select `p`.`idPendencia_Cliente` AS `idPendencia`,`c`.`nome` AS `nome`,`c`.`idCliente` AS `id`,`p`.`motivo` AS `motivo`,`p`.`aberto` AS `aberto` from (`pendencia_cliente` `p` join `cliente` `c` on((`p`.`idCliente` = `c`.`idCliente`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -2098,7 +2132,6 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`kliss`@`%` SQL SECURITY DEFINER */
 /*!50001 VIEW `vpendencia_veiculo` AS select `pv`.`idPendencia_Veiculo` AS `idPendencia`,concat(`mar`.`nomeMarca`,' ',`m`.`nomeModelo`) AS `nome`,`v`.`idVeiculo` AS `id`,`pv`.`motivo` AS `motivo`,`pv`.`aberto` AS `aberto` from (((`pendencia_veiculo` `pv` join `veiculo` `v` on((`pv`.`idVeiculo` = `v`.`idVeiculo`))) join `modelo` `m` on((`m`.`idModelo` = `v`.`idModelo`))) join `marca` `mar` on((`m`.`idMarca` = `mar`.`idMarca`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -2116,7 +2149,6 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `vvisualizacao_cancelamento` AS select `c`.`idCancelamento` AS `idCancelamento`,`l`.`idLocacao` AS `idLocacao`,`cl`.`nome` AS `nome`,`cl`.`idCliente` AS `idCliente`,`c`.`confirmacao` AS `confirmacao`,`c`.`motivo` AS `motivo` from (((`cancelamento` `c` join `locacao` `l` on(`l`.`idLocacao`)) join `solicitacao_locacao` `sl` on((`sl`.`idSolicitacao_Locacao` = `l`.`idSolicitacao_Locacao`))) join `cliente` `cl` on((`cl`.`idCliente` = `sl`.`idCliente`))) where isnull(`c`.`confirmacao`) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -2131,4 +2163,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-29 11:26:09
+-- Dump completed on 2019-05-03 10:48:20
