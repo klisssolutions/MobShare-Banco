@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.11, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.12, for Win64 (x86_64)
 --
--- Host: 10.107.144.16    Database: mydb
+-- Host: localhost    Database: mydb
 -- ------------------------------------------------------
--- Server version	8.0.11
+-- Server version	8.0.12
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -99,6 +99,30 @@ LOCK TABLES `anuncio_venda_veiculo` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `assunto`
+--
+
+DROP TABLE IF EXISTS `assunto`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `assunto` (
+  `idAssunto` int(11) NOT NULL AUTO_INCREMENT,
+  `assunto` varchar(45) NOT NULL,
+  PRIMARY KEY (`idAssunto`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `assunto`
+--
+
+LOCK TABLES `assunto` WRITE;
+/*!40000 ALTER TABLE `assunto` DISABLE KEYS */;
+INSERT INTO `assunto` VALUES (1,'Promoção'),(2,'Vendas'),(3,'Aluguel'),(4,'Cadastro de Veiculos');
+/*!40000 ALTER TABLE `assunto` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `avaliacao`
 --
 
@@ -113,7 +137,7 @@ CREATE TABLE `avaliacao` (
   PRIMARY KEY (`idAvaliacao`),
   KEY `idLocacao` (`idLocacao`),
   CONSTRAINT `avaliacao_ibfk_1` FOREIGN KEY (`idLocacao`) REFERENCES `locacao` (`idlocacao`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -122,6 +146,7 @@ CREATE TABLE `avaliacao` (
 
 LOCK TABLES `avaliacao` WRITE;
 /*!40000 ALTER TABLE `avaliacao` DISABLE KEYS */;
+INSERT INTO `avaliacao` VALUES (1,4,'gostei mt',1),(2,2,'legal',1),(3,5,'amei',2),(4,3,'ruim',2),(5,6,'uoou',1);
 /*!40000 ALTER TABLE `avaliacao` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -169,7 +194,7 @@ CREATE TABLE `avaliacao_veiculo` (
   KEY `idAvaliacao` (`idAvaliacao`),
   CONSTRAINT `avaliacao_veiculo_ibfk_1` FOREIGN KEY (`idVeiculo`) REFERENCES `veiculo` (`idveiculo`),
   CONSTRAINT `avaliacao_veiculo_ibfk_2` FOREIGN KEY (`idAvaliacao`) REFERENCES `avaliacao` (`idavaliacao`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -178,6 +203,7 @@ CREATE TABLE `avaliacao_veiculo` (
 
 LOCK TABLES `avaliacao_veiculo` WRITE;
 /*!40000 ALTER TABLE `avaliacao_veiculo` DISABLE KEYS */;
+INSERT INTO `avaliacao_veiculo` VALUES (1,1,1),(2,1,2),(3,2,3),(4,2,4),(5,1,5);
 /*!40000 ALTER TABLE `avaliacao_veiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1232,7 +1258,7 @@ CREATE TABLE `locacao` (
   PRIMARY KEY (`idLocacao`),
   KEY `idSolicitacao_Locador` (`idSolicitacao_Locacao`),
   CONSTRAINT `locacao_ibfk_1` FOREIGN KEY (`idSolicitacao_Locacao`) REFERENCES `solicitacao_locacao` (`idsolicitacao_locacao`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1241,7 +1267,7 @@ CREATE TABLE `locacao` (
 
 LOCK TABLES `locacao` WRITE;
 /*!40000 ALTER TABLE `locacao` DISABLE KEYS */;
-INSERT INTO `locacao` VALUES (1,1);
+INSERT INTO `locacao` VALUES (1,1),(2,2);
 /*!40000 ALTER TABLE `locacao` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1494,6 +1520,30 @@ LOCK TABLES `pedido_produto_fornecedor` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `pendencia`
+--
+
+DROP TABLE IF EXISTS `pendencia`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `pendencia` (
+  `idPendencia` int(11) NOT NULL AUTO_INCREMENT,
+  `motivo` text NOT NULL,
+  `aberto` tinyint(4) DEFAULT '1',
+  PRIMARY KEY (`idPendencia`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pendencia`
+--
+
+LOCK TABLES `pendencia` WRITE;
+/*!40000 ALTER TABLE `pendencia` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pendencia` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `pendencia_cliente`
 --
 
@@ -1545,7 +1595,6 @@ CREATE TABLE `pendencia_veiculo` (
 
 LOCK TABLES `pendencia_veiculo` WRITE;
 /*!40000 ALTER TABLE `pendencia_veiculo` DISABLE KEYS */;
-INSERT INTO `pendencia_veiculo` VALUES (1,6,'Aguardando aprovação do cadastro',1);
 /*!40000 ALTER TABLE `pendencia_veiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1725,7 +1774,7 @@ CREATE TABLE `solicitacao_locacao` (
   KEY `idVeiculo` (`idVeiculo`),
   CONSTRAINT `solicitacao_locacao_ibfk_1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idcliente`),
   CONSTRAINT `solicitacao_locacao_ibfk_2` FOREIGN KEY (`idVeiculo`) REFERENCES `veiculo` (`idveiculo`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1734,7 +1783,7 @@ CREATE TABLE `solicitacao_locacao` (
 
 LOCK TABLES `solicitacao_locacao` WRITE;
 /*!40000 ALTER TABLE `solicitacao_locacao` DISABLE KEYS */;
-INSERT INTO `solicitacao_locacao` VALUES (1,4,1,1,'2019-04-15 10:00:00','2019-04-15 16:00:00',NULL);
+INSERT INTO `solicitacao_locacao` VALUES (1,4,1,1,'2019-04-15 10:00:00','2019-04-15 16:00:00',NULL),(2,4,2,1,'2019-05-05 10:00:00','2019-05-05 15:00:00',NULL);
 /*!40000 ALTER TABLE `solicitacao_locacao` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1978,7 +2027,7 @@ CREATE TABLE `veiculo` (
 
 LOCK TABLES `veiculo` WRITE;
 /*!40000 ALTER TABLE `veiculo` DISABLE KEYS */;
-INSERT INTO `veiculo` VALUES (1,1,1,'vermelho',2,1,1,5,1999,50000,80000,1,1),(2,2,1,'preto',2,1,2,10,2000,0,100000,1,3),(3,3,1,'vermelho',2,1,1,50,2017,0,800000,1,1),(6,3,1,'torto',2,2,2,10,2010,5000,2000,1,1);
+INSERT INTO `veiculo` VALUES (1,1,1,'vermelho',2,1,1,5,1999,50000,80000,1,1),(2,2,1,'preto',2,1,2,10,2000,0,100000,1,3),(3,3,1,'vermelho',2,1,1,50,2017,0,800000,1,1);
 /*!40000 ALTER TABLE `veiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -2049,6 +2098,10 @@ SET character_set_client = utf8mb4;
 SET character_set_client = @saved_cs_client;
 
 --
+-- Dumping events for database 'mydb'
+--
+
+--
 -- Dumping routines for database 'mydb'
 --
 
@@ -2064,6 +2117,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `v_detalhes_locacao` AS select `l`.`idLocacao` AS `ID locação`,`cl`.`nome` AS `Locatário`,`cl2`.`nome` AS `Locador`,concat(`ma`.`nomeMarca`,' ',`mo`.`nomeModelo`) AS `Veiculo`,`sl`.`horarioInicio` AS `Inicio`,`sl`.`horarioFim` AS `Fim`,(`v`.`valorHora` * ceiling(((select timestampdiff(MINUTE,`solicitacao_locacao`.`horarioInicio`,`solicitacao_locacao`.`horarioFim`) from `solicitacao_locacao` where (`solicitacao_locacao`.`idSolicitacao_Locacao` = 1)) / 60))) AS `Valor total` from ((((((`solicitacao_locacao` `sl` join `cliente` `cl` on((`sl`.`idCliente` = `cl`.`idCliente`))) join `veiculo` `v` on((`v`.`idVeiculo` = `sl`.`idVeiculo`))) join `cliente` `cl2` on((`cl2`.`idCliente` = `v`.`idCliente`))) join `locacao` `l` on((`l`.`idSolicitacao_Locacao` = `sl`.`idSolicitacao_Locacao`))) join `modelo` `mo` on((`mo`.`idModelo` = `v`.`idModelo`))) join `marca` `ma` on((`ma`.`idMarca` = `mo`.`idMarca`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -2081,6 +2135,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `vanuncios_mobile` AS select `v`.`idVeiculo` AS `idVeiculo`,`mo`.`nomeModelo` AS `nomeModelo`,`ma`.`nomeMarca` AS `nomeMarca`,`ft`.`fotoVeiculo` AS `fotoVeiculo` from (((`veiculo` `v` join `modelo` `mo` on((`v`.`idModelo` = `mo`.`idModelo`))) join `marca` `ma` on((`ma`.`idMarca` = `mo`.`idMarca`))) join `foto_veiculo` `ft` on((`ft`.`idVeiculo` = `v`.`idVeiculo`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -2098,6 +2153,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `vavaliacao_veiculo` AS select `v`.`idVeiculo` AS `idVeiculo`,`mo`.`nomeModelo` AS `nomeModelo`,`ma`.`nomeMarca` AS `nomeMarca`,`a`.`depoimento` AS `depoimento`,`a`.`nota` AS `nota` from ((((`avaliacao_veiculo` `av` join `veiculo` `v` on((`v`.`idVeiculo` = `av`.`idVeiculo`))) join `modelo` `mo` on((`v`.`idModelo` = `mo`.`idModelo`))) join `marca` `ma` on((`mo`.`idMarca` = `ma`.`idMarca`))) join `avaliacao` `a` on((`a`.`idAvaliacao` = `av`.`idAvaliacao`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -2115,6 +2171,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `vpendencia_cliente` AS select `p`.`idPendencia_Cliente` AS `idPendencia`,`c`.`nome` AS `nome`,`c`.`idCliente` AS `id`,`p`.`motivo` AS `motivo`,`p`.`aberto` AS `aberto` from (`pendencia_cliente` `p` join `cliente` `c` on((`p`.`idCliente` = `c`.`idCliente`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -2132,6 +2189,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `vpendencia_veiculo` AS select `pv`.`idPendencia_Veiculo` AS `idPendencia`,concat(`mar`.`nomeMarca`,' ',`m`.`nomeModelo`) AS `nome`,`v`.`idVeiculo` AS `id`,`pv`.`motivo` AS `motivo`,`pv`.`aberto` AS `aberto` from (((`pendencia_veiculo` `pv` join `veiculo` `v` on((`pv`.`idVeiculo` = `v`.`idVeiculo`))) join `modelo` `m` on((`m`.`idModelo` = `v`.`idModelo`))) join `marca` `mar` on((`m`.`idMarca` = `mar`.`idMarca`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -2149,6 +2207,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `vvisualizacao_cancelamento` AS select `c`.`idCancelamento` AS `idCancelamento`,`l`.`idLocacao` AS `idLocacao`,`cl`.`nome` AS `nome`,`cl`.`idCliente` AS `idCliente`,`c`.`confirmacao` AS `confirmacao`,`c`.`motivo` AS `motivo` from (((`cancelamento` `c` join `locacao` `l` on(`l`.`idLocacao`)) join `solicitacao_locacao` `sl` on((`sl`.`idSolicitacao_Locacao` = `l`.`idSolicitacao_Locacao`))) join `cliente` `cl` on((`cl`.`idCliente` = `sl`.`idCliente`))) where isnull(`c`.`confirmacao`) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -2163,4 +2222,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-03 10:48:20
+-- Dump completed on 2019-05-05 19:13:13
