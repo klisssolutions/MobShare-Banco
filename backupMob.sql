@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.12, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.11, for Win64 (x86_64)
 --
 -- Host: localhost    Database: mydb
 -- ------------------------------------------------------
--- Server version	8.0.12
+-- Server version	8.0.11
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -146,7 +146,7 @@ CREATE TABLE `avaliacao` (
 
 LOCK TABLES `avaliacao` WRITE;
 /*!40000 ALTER TABLE `avaliacao` DISABLE KEYS */;
-INSERT INTO `avaliacao` VALUES (1,4,'gostei mt',1),(2,2,'legal',1),(3,5,'amei',2),(4,3,'ruim',2),(5,4,'uoou',1);
+INSERT INTO `avaliacao` VALUES (1,4,'gostei mt',1);
 /*!40000 ALTER TABLE `avaliacao` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -203,7 +203,7 @@ CREATE TABLE `avaliacao_veiculo` (
 
 LOCK TABLES `avaliacao_veiculo` WRITE;
 /*!40000 ALTER TABLE `avaliacao_veiculo` DISABLE KEYS */;
-INSERT INTO `avaliacao_veiculo` VALUES (1,1,1),(2,1,2),(3,2,3),(4,2,4),(5,1,5);
+INSERT INTO `avaliacao_veiculo` VALUES (1,1,1);
 /*!40000 ALTER TABLE `avaliacao_veiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -346,7 +346,7 @@ CREATE TABLE `cancelamento` (
 
 LOCK TABLES `cancelamento` WRITE;
 /*!40000 ALTER TABLE `cancelamento` DISABLE KEYS */;
-INSERT INTO `cancelamento` VALUES (1,1,4,1,'A inteligência artificial é um ramo de pesquisa da ciência da computação que busca, através de símbolos computacionais, construir mecanismos e/ou dispositivos que simulem a capacidade do ser humano de pensar, resolver problemas, ou seja, de ser inteligente. O estudo e desenvolvimento desse ramo de pesquisa tiveram início na Segunda Guerra Mundial.');
+INSERT INTO `cancelamento` VALUES (1,1,4,NULL,'A inteligência artificial é um ramo de pesquisa da ciência da computação que busca, através de símbolos computacionais, construir mecanismos e/ou dispositivos que simulem a capacidade do ser humano de pensar, resolver problemas, ou seja, de ser inteligente. O estudo e desenvolvimento desse ramo de pesquisa tiveram início na Segunda Guerra Mundial.');
 /*!40000 ALTER TABLE `cancelamento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1586,7 +1586,7 @@ CREATE TABLE `pendencia_veiculo` (
   PRIMARY KEY (`idPendencia_Veiculo`),
   KEY `idVeiculo` (`idVeiculo`),
   CONSTRAINT `pendencia_veiculo_ibfk_1` FOREIGN KEY (`idVeiculo`) REFERENCES `veiculo` (`idveiculo`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1595,6 +1595,7 @@ CREATE TABLE `pendencia_veiculo` (
 
 LOCK TABLES `pendencia_veiculo` WRITE;
 /*!40000 ALTER TABLE `pendencia_veiculo` DISABLE KEYS */;
+INSERT INTO `pendencia_veiculo` VALUES (2,1,'',1);
 /*!40000 ALTER TABLE `pendencia_veiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2208,7 +2209,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `vvisualizacao_cancelamento` AS select `c`.`idCancelamento` AS `idCancelamento`,`l`.`idLocacao` AS `idLocacao`,`cl`.`nome` AS `nome`,`cl`.`idCliente` AS `idCliente`,`c`.`confirmacao` AS `confirmacao`,`c`.`motivo` AS `motivo` from (((`cancelamento` `c` join `locacao` `l` on(`l`.`idLocacao`)) join `solicitacao_locacao` `sl` on((`sl`.`idSolicitacao_Locacao` = `l`.`idSolicitacao_Locacao`))) join `cliente` `cl` on((`cl`.`idCliente` = `sl`.`idCliente`))) where isnull(`c`.`confirmacao`) */;
+/*!50001 VIEW `vvisualizacao_cancelamento` AS select `c`.`idCancelamento` AS `idCancelamento`,`l`.`idLocacao` AS `idLocacao`,`cl`.`nome` AS `nome`,`c`.`idCliente` AS `idCliente`,`c`.`confirmacao` AS `confirmacao`,`c`.`motivo` AS `motivo` from (((`cancelamento` `c` join `locacao` `l` on((`l`.`idLocacao` = `c`.`idLocacao`))) join `solicitacao_locacao` `sl` on((`sl`.`idSolicitacao_Locacao` = `l`.`idSolicitacao_Locacao`))) join `cliente` `cl` on((`cl`.`idCliente` = `sl`.`idCliente`))) where isnull(`c`.`confirmacao`) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -2222,4 +2223,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-05 19:35:32
+-- Dump completed on 2019-05-06 10:01:58
