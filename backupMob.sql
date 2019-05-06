@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.11, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.12, for Win64 (x86_64)
 --
 -- Host: localhost    Database: mydb
 -- ------------------------------------------------------
--- Server version	8.0.11
+-- Server version	8.0.12
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -29,7 +29,7 @@ CREATE TABLE `acessorio` (
   PRIMARY KEY (`idAcessorio`),
   KEY `idTipo_Veiculo` (`idTipo_Veiculo`),
   CONSTRAINT `acessorio_ibfk_1` FOREIGN KEY (`idTipo_Veiculo`) REFERENCES `tipo_veiculo` (`idtipo_veiculo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,6 +38,7 @@ CREATE TABLE `acessorio` (
 
 LOCK TABLES `acessorio` WRITE;
 /*!40000 ALTER TABLE `acessorio` DISABLE KEYS */;
+INSERT INTO `acessorio` VALUES (1,1,'Cadeirinha de bebê');
 /*!40000 ALTER TABLE `acessorio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -59,7 +60,7 @@ CREATE TABLE `acessorio_veiculo` (
   KEY `idAcessorio` (`idAcessorio`),
   CONSTRAINT `acessorio_veiculo_ibfk_1` FOREIGN KEY (`idVeiculo`) REFERENCES `veiculo` (`idveiculo`) ON DELETE CASCADE,
   CONSTRAINT `acessorio_veiculo_ibfk_2` FOREIGN KEY (`idAcessorio`) REFERENCES `acessorio` (`idacessorio`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,6 +69,7 @@ CREATE TABLE `acessorio_veiculo` (
 
 LOCK TABLES `acessorio_veiculo` WRITE;
 /*!40000 ALTER TABLE `acessorio_veiculo` DISABLE KEYS */;
+INSERT INTO `acessorio_veiculo` VALUES (1,1,1,1,NULL);
 /*!40000 ALTER TABLE `acessorio_veiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1990,6 +1992,23 @@ SET character_set_client = utf8mb4;
 SET character_set_client = @saved_cs_client;
 
 --
+-- Temporary view structure for view `vdetalhes_veiculo`
+--
+
+DROP TABLE IF EXISTS `vdetalhes_veiculo`;
+/*!50001 DROP VIEW IF EXISTS `vdetalhes_veiculo`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8mb4;
+/*!50001 CREATE VIEW `vdetalhes_veiculo` AS SELECT 
+ 1 AS `idVeiculo`,
+ 1 AS `nomeMarca`,
+ 1 AS `nomeModelo`,
+ 1 AS `cor`,
+ 1 AS `fotoVeiculo`,
+ 1 AS `nomeAcessorio`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Table structure for table `veiculo`
 --
 
@@ -2161,6 +2180,24 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
+-- Final view structure for view `vdetalhes_veiculo`
+--
+
+/*!50001 DROP VIEW IF EXISTS `vdetalhes_veiculo`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `vdetalhes_veiculo` AS select `v`.`idVeiculo` AS `idVeiculo`,`ma`.`nomeMarca` AS `nomeMarca`,`mo`.`nomeModelo` AS `nomeModelo`,`v`.`cor` AS `cor`,`ft`.`fotoVeiculo` AS `fotoVeiculo`,`a`.`nomeAcessorio` AS `nomeAcessorio` from (((((`veiculo` `v` join `modelo` `mo` on((`mo`.`idModelo` = `v`.`idModelo`))) join `marca` `ma` on((`ma`.`idMarca` = `mo`.`idMarca`))) join `foto_veiculo` `ft` on((`ft`.`idVeiculo` = `v`.`idVeiculo`))) join `acessorio_veiculo` `av` on((`av`.`idVeiculo` = `v`.`idVeiculo`))) join `acessorio` `a` on((`a`.`idAcessorio` = `av`.`idAcessorio`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
 -- Final view structure for view `vpendencia_cliente`
 --
 
@@ -2223,4 +2260,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-06 10:01:58
+-- Dump completed on 2019-05-06 17:34:45
