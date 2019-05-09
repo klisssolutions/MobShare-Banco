@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.12, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.11, for Win64 (x86_64)
 --
 -- Host: localhost    Database: mydb
 -- ------------------------------------------------------
--- Server version	8.0.12
+-- Server version	8.0.11
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -88,7 +88,7 @@ CREATE TABLE `anuncio_venda_veiculo` (
   PRIMARY KEY (`idAnuncio_Venda_Veiculo`),
   KEY `idVeiculo` (`idVeiculo`),
   CONSTRAINT `anuncio_venda_veiculo_ibfk_1` FOREIGN KEY (`idVeiculo`) REFERENCES `veiculo` (`idveiculo`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -97,6 +97,7 @@ CREATE TABLE `anuncio_venda_veiculo` (
 
 LOCK TABLES `anuncio_venda_veiculo` WRITE;
 /*!40000 ALTER TABLE `anuncio_venda_veiculo` DISABLE KEYS */;
+INSERT INTO `anuncio_venda_veiculo` VALUES (1,1,1,NULL);
 /*!40000 ALTER TABLE `anuncio_venda_veiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -431,7 +432,7 @@ CREATE TABLE `categoria_veiculo` (
 
 LOCK TABLES `categoria_veiculo` WRITE;
 /*!40000 ALTER TABLE `categoria_veiculo` DISABLE KEYS */;
-INSERT INTO `categoria_veiculo` VALUES (1,1,'Carro de passeio',10),(2,1,'Carro de luxo',20),(3,2,'Moto esportiva',10);
+INSERT INTO `categoria_veiculo` VALUES (1,1,'Carro',10),(2,1,'Moto',20),(3,2,'Bicicleta',10);
 /*!40000 ALTER TABLE `categoria_veiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1285,7 +1286,7 @@ CREATE TABLE `marca` (
   `nomeMarca` varchar(45) NOT NULL,
   PRIMARY KEY (`idMarca`),
   UNIQUE KEY `nomeMarca` (`nomeMarca`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1294,7 +1295,7 @@ CREATE TABLE `marca` (
 
 LOCK TABLES `marca` WRITE;
 /*!40000 ALTER TABLE `marca` DISABLE KEYS */;
-INSERT INTO `marca` VALUES (1,'BMW'),(3,'FIAT'),(2,'HONDA');
+INSERT INTO `marca` VALUES (1,'BMW'),(10,'CHEVROLET'),(6,'FERRARI'),(3,'FIAT'),(9,'FORD'),(8,'HAYABUSA'),(2,'HONDA'),(7,'LAMBORGHINI'),(11,'PEUGEOT'),(5,'YAMAHA');
 /*!40000 ALTER TABLE `marca` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1342,7 +1343,7 @@ CREATE TABLE `modelo` (
   UNIQUE KEY `nomeModelo` (`nomeModelo`),
   KEY `idMarca` (`idMarca`),
   CONSTRAINT `modelo_ibfk_1` FOREIGN KEY (`idMarca`) REFERENCES `marca` (`idmarca`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1351,7 +1352,7 @@ CREATE TABLE `modelo` (
 
 LOCK TABLES `modelo` WRITE;
 /*!40000 ALTER TABLE `modelo` DISABLE KEYS */;
-INSERT INTO `modelo` VALUES (1,3,'UNO'),(2,2,'MOTONA'),(3,2,'MOTINHA');
+INSERT INTO `modelo` VALUES (1,3,'Honda CBR 1000RR Fireblade'),(2,2,'MOTONA'),(3,2,'Fiat Grand Siena'),(13,5,'OI'),(14,8,'OLA'),(15,5,'CAMARO');
 /*!40000 ALTER TABLE `modelo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1588,7 +1589,7 @@ CREATE TABLE `pendencia_veiculo` (
   PRIMARY KEY (`idPendencia_Veiculo`),
   KEY `idVeiculo` (`idVeiculo`),
   CONSTRAINT `pendencia_veiculo_ibfk_1` FOREIGN KEY (`idVeiculo`) REFERENCES `veiculo` (`idveiculo`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1597,7 +1598,7 @@ CREATE TABLE `pendencia_veiculo` (
 
 LOCK TABLES `pendencia_veiculo` WRITE;
 /*!40000 ALTER TABLE `pendencia_veiculo` DISABLE KEYS */;
-INSERT INTO `pendencia_veiculo` VALUES (2,1,'',1);
+INSERT INTO `pendencia_veiculo` VALUES (2,1,'',1),(3,7,'Aguardando aprovação do cadastro',1),(4,8,'Aguardando aprovação do cadastro',1),(5,9,'Aguardando aprovação do cadastro',1),(6,10,'Aguardando aprovação do cadastro',1),(7,11,'Aguardando aprovação do cadastro',1),(8,12,'Aguardando aprovação do cadastro',1),(9,13,'Aguardando aprovação do cadastro',1),(10,14,'Aguardando aprovação do cadastro',1),(11,15,'Aguardando aprovação do cadastro',1),(12,16,'Aguardando aprovação do cadastro',1),(13,17,'Aguardando aprovação do cadastro',1),(14,18,'Aguardando aprovação do cadastro',1),(15,19,'Aguardando aprovação do cadastro',1);
 /*!40000 ALTER TABLE `pendencia_veiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1852,6 +1853,7 @@ DROP TABLE IF EXISTS `tipo_veiculo`;
 CREATE TABLE `tipo_veiculo` (
   `idTipo_Veiculo` int(11) NOT NULL AUTO_INCREMENT,
   `nomeTipo` varchar(20) NOT NULL,
+  `foto` int(11) DEFAULT NULL,
   PRIMARY KEY (`idTipo_Veiculo`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1862,7 +1864,7 @@ CREATE TABLE `tipo_veiculo` (
 
 LOCK TABLES `tipo_veiculo` WRITE;
 /*!40000 ALTER TABLE `tipo_veiculo` DISABLE KEYS */;
-INSERT INTO `tipo_veiculo` VALUES (1,'Carro'),(2,'Moto'),(3,'Bicicleta');
+INSERT INTO `tipo_veiculo` VALUES (1,'Carro',6),(2,'Moto',4),(3,'Bicicleta',2);
 /*!40000 ALTER TABLE `tipo_veiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2026,9 +2028,10 @@ CREATE TABLE `veiculo` (
   `valorHora` float DEFAULT NULL,
   `ano` int(11) NOT NULL,
   `quilometragem` int(11) DEFAULT NULL,
-  `valorVenda` float DEFAULT NULL,
   `idEndereco` int(11) NOT NULL,
   `idModelo` int(11) NOT NULL,
+  `ativo` tinyint(4) DEFAULT '1',
+  `disponivel` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`idVeiculo`),
   KEY `idCategoria_Veiculo` (`idCategoria_Veiculo`),
   KEY `idCliente` (`idCliente`),
@@ -2038,7 +2041,7 @@ CREATE TABLE `veiculo` (
   CONSTRAINT `veiculo_ibfk_2` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idcliente`),
   CONSTRAINT `veiculo_ibfk_3` FOREIGN KEY (`idEndereco`) REFERENCES `endereco` (`idendereco`),
   CONSTRAINT `veiculo_ibfk_4` FOREIGN KEY (`idModelo`) REFERENCES `modelo` (`idmodelo`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2047,7 +2050,7 @@ CREATE TABLE `veiculo` (
 
 LOCK TABLES `veiculo` WRITE;
 /*!40000 ALTER TABLE `veiculo` DISABLE KEYS */;
-INSERT INTO `veiculo` VALUES (1,1,1,'vermelho',2,1,1,5,1999,50000,80000,1,1),(2,2,1,'preto',2,1,2,10,2000,0,100000,1,3),(3,3,1,'vermelho',2,1,1,50,2017,0,800000,1,1);
+INSERT INTO `veiculo` VALUES (1,1,1,'vermelho',2,1,1,5,1999,50000,1,1,1,0),(2,2,1,'preto',2,1,2,10,2000,0,1,3,1,0),(3,3,1,'vermelho',2,1,1,50,2017,0,1,1,1,0),(7,1,4,'Vermelho',15,123,101,150,2012,2000,1,3,1,0),(8,1,4,'Vermelho',15,123,101,150,2012,2000,1,3,1,0),(9,2,4,'Rosa',12,13,13,100,2010,100,1,2,1,0),(10,2,4,'Vermelho',12,123,13,150,2012,2000,1,1,1,0),(11,2,4,'Vermelho',15,123,101,150,2012,2000,1,2,1,0),(12,1,4,'Vermelho',12,123,101,150,2010,2000,1,1,1,0),(13,1,4,'Vermelho',15,123,101,150,2012,2000,1,2,1,0),(14,1,4,'Rosa',15,123,101,100,2018,2000,1,1,1,0),(15,1,4,'Branco',15,123,101,100,2012,2000,1,3,1,0),(16,1,4,'Vermelho',15,123,101,150,2012,2000,1,1,1,0),(17,1,4,'Vermelho',15,123,101,150,2012,2000,1,2,1,0),(18,2,4,'Vermelho',15,123,101,150,2012,100,1,3,1,0),(19,1,4,'Vermelho',12,123,101,150,2012,2000,1,3,1,0);
 /*!40000 ALTER TABLE `veiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -2260,4 +2263,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-06 17:34:45
+-- Dump completed on 2019-05-09 11:26:12
