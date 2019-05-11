@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.11, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.12, for Win64 (x86_64)
 --
 -- Host: localhost    Database: mydb
 -- ------------------------------------------------------
--- Server version	8.0.11
+-- Server version	8.0.12
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -29,7 +29,7 @@ CREATE TABLE `acessorio` (
   PRIMARY KEY (`idAcessorio`),
   KEY `idTipo_Veiculo` (`idTipo_Veiculo`),
   CONSTRAINT `acessorio_ibfk_1` FOREIGN KEY (`idTipo_Veiculo`) REFERENCES `tipo_veiculo` (`idtipo_veiculo`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,7 @@ CREATE TABLE `acessorio` (
 
 LOCK TABLES `acessorio` WRITE;
 /*!40000 ALTER TABLE `acessorio` DISABLE KEYS */;
-INSERT INTO `acessorio` VALUES (1,1,'Cadeirinha de bebê');
+INSERT INTO `acessorio` VALUES (1,1,'Cadeirinha de bebê'),(2,1,'Air bag');
 /*!40000 ALTER TABLE `acessorio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -60,7 +60,7 @@ CREATE TABLE `acessorio_veiculo` (
   KEY `idAcessorio` (`idAcessorio`),
   CONSTRAINT `acessorio_veiculo_ibfk_1` FOREIGN KEY (`idVeiculo`) REFERENCES `veiculo` (`idveiculo`) ON DELETE CASCADE,
   CONSTRAINT `acessorio_veiculo_ibfk_2` FOREIGN KEY (`idAcessorio`) REFERENCES `acessorio` (`idacessorio`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +69,7 @@ CREATE TABLE `acessorio_veiculo` (
 
 LOCK TABLES `acessorio_veiculo` WRITE;
 /*!40000 ALTER TABLE `acessorio_veiculo` DISABLE KEYS */;
-INSERT INTO `acessorio_veiculo` VALUES (1,1,1,1,NULL);
+INSERT INTO `acessorio_veiculo` VALUES (1,1,1,1,NULL),(2,1,2,1,NULL);
 /*!40000 ALTER TABLE `acessorio_veiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1118,7 +1118,7 @@ CREATE TABLE `foto_veiculo` (
   PRIMARY KEY (`idFoto_Veiculo`),
   KEY `idVeiculo` (`idVeiculo`),
   CONSTRAINT `foto_veiculo_ibfk_1` FOREIGN KEY (`idVeiculo`) REFERENCES `veiculo` (`idveiculo`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1127,7 +1127,7 @@ CREATE TABLE `foto_veiculo` (
 
 LOCK TABLES `foto_veiculo` WRITE;
 /*!40000 ALTER TABLE `foto_veiculo` DISABLE KEYS */;
-INSERT INTO `foto_veiculo` VALUES (1,2,'carro.jpeg','frontal'),(2,3,'motoHonda.jpg','frontal'),(4,1,'carroUno.jpg','frontal');
+INSERT INTO `foto_veiculo` VALUES (1,2,'carro.jpeg','frontal'),(2,3,'motoHonda.jpg','frontal'),(4,1,'carroUno.jpg','frontal'),(5,1,'carro1Dentro.jpg','dentro');
 /*!40000 ALTER TABLE `foto_veiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2003,11 +2003,12 @@ SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8mb4;
 /*!50001 CREATE VIEW `vdetalhes_veiculo` AS SELECT 
  1 AS `idVeiculo`,
- 1 AS `nomeMarca`,
  1 AS `nomeModelo`,
+ 1 AS `nomeMarca`,
  1 AS `cor`,
- 1 AS `fotoVeiculo`,
- 1 AS `nomeAcessorio`*/;
+ 1 AS `valor`,
+ 1 AS `ano`,
+ 1 AS `nota`*/;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -2159,7 +2160,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `vanuncios_mobile` AS select `v`.`idVeiculo` AS `idVeiculo`,`mo`.`nomeModelo` AS `nomeModelo`,`ma`.`nomeMarca` AS `nomeMarca`,`ft`.`fotoVeiculo` AS `fotoVeiculo` from (((`veiculo` `v` join `modelo` `mo` on((`v`.`idModelo` = `mo`.`idModelo`))) join `marca` `ma` on((`ma`.`idMarca` = `mo`.`idMarca`))) join `foto_veiculo` `ft` on((`ft`.`idVeiculo` = `v`.`idVeiculo`))) */;
+/*!50001 VIEW `vanuncios_mobile` AS select `v`.`idVeiculo` AS `idVeiculo`,`mo`.`nomeModelo` AS `nomeModelo`,`ma`.`nomeMarca` AS `nomeMarca`,`ft`.`fotoVeiculo` AS `fotoVeiculo` from (((`veiculo` `v` join `modelo` `mo` on((`v`.`idModelo` = `mo`.`idModelo`))) join `marca` `ma` on((`ma`.`idMarca` = `mo`.`idMarca`))) join `foto_veiculo` `ft` on((`ft`.`idVeiculo` = `v`.`idVeiculo`))) where (`ft`.`perfil` = 'frontal') */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -2195,7 +2196,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `vdetalhes_veiculo` AS select `v`.`idVeiculo` AS `idVeiculo`,`ma`.`nomeMarca` AS `nomeMarca`,`mo`.`nomeModelo` AS `nomeModelo`,`v`.`cor` AS `cor`,`ft`.`fotoVeiculo` AS `fotoVeiculo`,`a`.`nomeAcessorio` AS `nomeAcessorio` from (((((`veiculo` `v` join `modelo` `mo` on((`mo`.`idModelo` = `v`.`idModelo`))) join `marca` `ma` on((`ma`.`idMarca` = `mo`.`idMarca`))) join `foto_veiculo` `ft` on((`ft`.`idVeiculo` = `v`.`idVeiculo`))) join `acessorio_veiculo` `av` on((`av`.`idVeiculo` = `v`.`idVeiculo`))) join `acessorio` `a` on((`a`.`idAcessorio` = `av`.`idAcessorio`))) */;
+/*!50001 VIEW `vdetalhes_veiculo` AS select `v`.`idVeiculo` AS `idVeiculo`,`mo`.`nomeModelo` AS `nomeModelo`,`ma`.`nomeMarca` AS `nomeMarca`,`v`.`cor` AS `cor`,`v`.`valorHora` AS `valor`,`v`.`ano` AS `ano`,(select avg(`a`.`nota`) from (`avaliacao` `a` join `avaliacao_veiculo` `av` on((`a`.`idAvaliacao` = `av`.`idAvaliacao`))) where (`av`.`idVeiculo` = `v`.`idVeiculo`)) AS `nota` from (((`veiculo` `v` join `modelo` `mo` on((`v`.`idModelo` = `mo`.`idModelo`))) join `marca` `ma` on((`ma`.`idMarca` = `mo`.`idMarca`))) join `foto_veiculo` `ft` on((`ft`.`idVeiculo` = `v`.`idVeiculo`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -2263,4 +2264,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-09 11:26:12
+-- Dump completed on 2019-05-11  0:06:49
