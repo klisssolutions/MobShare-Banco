@@ -54,3 +54,49 @@ begin
 		
 end$
 DELIMITER ;
+
+
+
+DELIMITER $
+create trigger t_baixa_conta_receber after update on conta_receber
+for each row
+begin
+
+	
+    declare saldo_atual float;
+    set saldo_atual = (select saldo from banco where idBanco = new.idBanco);
+
+	if(old.paga is null and new.paga = 1) then
+    
+		update banco set saldo = (saldo_atual + new.valor) where idBanco = new.idBanco;
+    
+    end if;
+    
+
+	
+
+end$
+DELIMITER ;
+
+
+
+DELIMITER $
+create trigger t_baixa_conta_pagar after update on conta_pagar
+for each row
+begin
+
+	
+    declare saldo_atual float;
+    set saldo_atual = (select saldo from banco where idBanco = new.idBanco);
+
+	if(old.paga is null and new.paga = 1) then
+    
+		update banco set saldo = (saldo_atual - new.valor) where idBanco = new.idBanco;
+    
+    end if;
+    
+
+	
+
+end$
+DELIMITER ;

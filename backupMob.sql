@@ -291,7 +291,7 @@ CREATE TABLE `banco` (
 
 LOCK TABLES `banco` WRITE;
 /*!40000 ALTER TABLE `banco` DISABLE KEYS */;
-INSERT INTO `banco` VALUES (1,'063','Bradesco','072','10',50000,1);
+INSERT INTO `banco` VALUES (1,'063','Bradesco','072','10',50001,1);
 /*!40000 ALTER TABLE `banco` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -643,6 +643,7 @@ CREATE TABLE `conta_pagar` (
   `vencimento` date NOT NULL,
   `descricao` varchar(100) DEFAULT NULL,
   `idBanco` int(11) NOT NULL,
+  `paga` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`idConta_Pagar`),
   KEY `idBanco` (`idBanco`),
   CONSTRAINT `conta_pagar_ibfk_1` FOREIGN KEY (`idBanco`) REFERENCES `banco` (`idbanco`)
@@ -655,9 +656,39 @@ CREATE TABLE `conta_pagar` (
 
 LOCK TABLES `conta_pagar` WRITE;
 /*!40000 ALTER TABLE `conta_pagar` DISABLE KEYS */;
-INSERT INTO `conta_pagar` VALUES (2,9,'2019-06-14',NULL,1);
+INSERT INTO `conta_pagar` VALUES (2,9,'2019-06-14',NULL,1,1);
 /*!40000 ALTER TABLE `conta_pagar` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `t_baixa_conta_pagar` AFTER UPDATE ON `conta_pagar` FOR EACH ROW begin
+
+	
+    declare saldo_atual float;
+    set saldo_atual = (select saldo from banco where idBanco = new.idBanco);
+
+	if(old.paga is null and new.paga = 1) then
+    
+		update banco set saldo = (saldo_atual - new.valor) where idBanco = new.idBanco;
+    
+    end if;
+    
+
+	
+
+end */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `conta_pagar_compra`
@@ -773,9 +804,39 @@ CREATE TABLE `conta_receber` (
 
 LOCK TABLES `conta_receber` WRITE;
 /*!40000 ALTER TABLE `conta_receber` DISABLE KEYS */;
-INSERT INTO `conta_receber` VALUES (6,'2019-06-14',1,10,NULL,NULL,27);
+INSERT INTO `conta_receber` VALUES (6,'2019-06-14',1,10,NULL,1,27);
 /*!40000 ALTER TABLE `conta_receber` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `t_baixa_conta_receber` AFTER UPDATE ON `conta_receber` FOR EACH ROW begin
+
+	
+    declare saldo_atual float;
+    set saldo_atual = (select saldo from banco where idBanco = new.idBanco);
+
+	if(old.paga is null and new.paga = 1) then
+    
+		update banco set saldo = (saldo_atual + new.valor) where idBanco = new.idBanco;
+    
+    end if;
+    
+
+	
+
+end */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `cupom`
@@ -2376,4 +2437,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-15 23:06:50
+-- Dump completed on 2019-05-16  9:08:40
