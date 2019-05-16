@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.11, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.12, for Win64 (x86_64)
 --
 -- Host: localhost    Database: mydb
 -- ------------------------------------------------------
--- Server version	8.0.11
+-- Server version	8.0.12
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -280,8 +280,9 @@ CREATE TABLE `banco` (
   `agencia` varchar(45) NOT NULL,
   `conta` varchar(45) NOT NULL,
   `saldo` float NOT NULL,
+  `receiver` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`idBanco`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -290,6 +291,7 @@ CREATE TABLE `banco` (
 
 LOCK TABLES `banco` WRITE;
 /*!40000 ALTER TABLE `banco` DISABLE KEYS */;
+INSERT INTO `banco` VALUES (1,'063','Bradesco','072','10',50000,1);
 /*!40000 ALTER TABLE `banco` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -637,15 +639,14 @@ DROP TABLE IF EXISTS `conta_pagar`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `conta_pagar` (
   `idConta_Pagar` int(11) NOT NULL AUTO_INCREMENT,
-  `codigo` varchar(45) DEFAULT NULL,
   `valor` float NOT NULL,
-  `vencimento` int(11) NOT NULL,
+  `vencimento` date NOT NULL,
   `descricao` varchar(100) DEFAULT NULL,
   `idBanco` int(11) NOT NULL,
   PRIMARY KEY (`idConta_Pagar`),
   KEY `idBanco` (`idBanco`),
   CONSTRAINT `conta_pagar_ibfk_1` FOREIGN KEY (`idBanco`) REFERENCES `banco` (`idbanco`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -654,6 +655,7 @@ CREATE TABLE `conta_pagar` (
 
 LOCK TABLES `conta_pagar` WRITE;
 /*!40000 ALTER TABLE `conta_pagar` DISABLE KEYS */;
+INSERT INTO `conta_pagar` VALUES (2,9,'2019-06-14',NULL,1);
 /*!40000 ALTER TABLE `conta_pagar` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -762,7 +764,7 @@ CREATE TABLE `conta_receber` (
   KEY `idLocacao` (`idLocacao`),
   CONSTRAINT `conta_receber_ibfk_1` FOREIGN KEY (`idBanco`) REFERENCES `banco` (`idbanco`),
   CONSTRAINT `conta_receber_ibfk_2` FOREIGN KEY (`idLocacao`) REFERENCES `locacao` (`idlocacao`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -771,6 +773,7 @@ CREATE TABLE `conta_receber` (
 
 LOCK TABLES `conta_receber` WRITE;
 /*!40000 ALTER TABLE `conta_receber` DISABLE KEYS */;
+INSERT INTO `conta_receber` VALUES (6,'2019-06-14',1,10,NULL,NULL,27);
 /*!40000 ALTER TABLE `conta_receber` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1258,10 +1261,11 @@ DROP TABLE IF EXISTS `locacao`;
 CREATE TABLE `locacao` (
   `idLocacao` int(11) NOT NULL AUTO_INCREMENT,
   `idSolicitacao_Locacao` int(11) NOT NULL,
+  `valor` float DEFAULT NULL,
   PRIMARY KEY (`idLocacao`),
   KEY `idSolicitacao_Locador` (`idSolicitacao_Locacao`),
   CONSTRAINT `locacao_ibfk_1` FOREIGN KEY (`idSolicitacao_Locacao`) REFERENCES `solicitacao_locacao` (`idsolicitacao_locacao`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1270,9 +1274,53 @@ CREATE TABLE `locacao` (
 
 LOCK TABLES `locacao` WRITE;
 /*!40000 ALTER TABLE `locacao` DISABLE KEYS */;
-INSERT INTO `locacao` VALUES (1,1),(2,2);
+INSERT INTO `locacao` VALUES (1,1,NULL),(2,2,NULL),(27,3,10);
 /*!40000 ALTER TABLE `locacao` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `t_geracao_conta_receber_pagar` AFTER INSERT ON `locacao` FOR EACH ROW begin
+
+	
+    declare receber float;
+    declare pagar float;
+    declare banco int;
+    declare porcentagem_empresa float;
+    
+    
+    set banco = (select idBanco from banco where receiver = 1);
+    
+    set porcentagem_empresa = (select distinct cv.porcentagemGanhoEmpresa from solicitacao_locacao as sl join locacao as l 
+    on sl.idSolicitacao_locacao = l.idSolicitacao_locacao join veiculo as v on v.idVeiculo = sl.idVeiculo 
+    join categoria_veiculo as cv on cv.idCategoria_veiculo = v.idCategoria_veiculo  where v.idVeiculo = 
+    (select sl.idVeiculo from solicitacao_locacao as sl join locacao as l on l.idSolicitacao_locacao = sl.idSolicitacao_locacao 
+    where l.idLocacao = new.idLocacao));
+    
+    
+    
+	set receber =  new.valor;
+    
+    
+    insert into conta_receber(vencimento, idBanco, valor, idLocacao) 
+    values(DATE_ADD(CURDATE(), INTERVAL 30 DAY), banco, receber, NEW.idLocacao);
+    
+    set pagar = receber - ((receber * porcentagem_empresa)/100 );
+    
+    insert into conta_pagar( valor, vencimento, idBanco) values( pagar, DATE_ADD(CURDATE(), INTERVAL 30 DAY), banco);
+
+end */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `marca`
@@ -1787,9 +1835,36 @@ CREATE TABLE `solicitacao_locacao` (
 
 LOCK TABLES `solicitacao_locacao` WRITE;
 /*!40000 ALTER TABLE `solicitacao_locacao` DISABLE KEYS */;
-INSERT INTO `solicitacao_locacao` VALUES (1,4,1,1,'2019-04-15 10:00:00','2019-04-15 16:00:00',NULL),(2,4,2,1,'2019-05-05 10:00:00','2019-05-05 15:00:00',NULL),(3,1,1,NULL,'2019-04-15 16:00:00','2019-04-15 18:00:00',NULL),(4,5,1,NULL,'2019-04-15 16:20:00','2019-04-15 12:30:00',NULL),(5,5,1,NULL,'2019-04-15 02:20:00','2019-04-15 03:30:00',NULL),(6,5,1,NULL,'2019-05-29 02:26:00','2019-05-30 02:26:00',NULL),(7,5,1,NULL,'2019-05-29 12:30:00','2019-05-30 18:30:00',NULL),(8,5,1,NULL,'2019-05-16 18:30:00','2019-05-08 18:30:00',NULL),(9,5,1,NULL,'2019-05-15 18:30:00','2019-05-16 01:18:00',NULL);
+INSERT INTO `solicitacao_locacao` VALUES (1,4,1,1,'2019-04-15 10:00:00','2019-04-15 16:00:00',NULL),(2,4,2,1,'2019-05-05 10:00:00','2019-05-05 15:00:00',NULL),(3,1,1,1,'2019-04-15 16:00:00','2019-04-15 18:00:00',NULL),(4,5,1,NULL,'2019-04-15 16:20:00','2019-04-15 12:30:00',NULL),(5,5,1,NULL,'2019-04-15 02:20:00','2019-04-15 03:30:00',NULL),(6,5,1,NULL,'2019-05-29 02:26:00','2019-05-30 02:26:00',NULL),(7,5,1,NULL,'2019-05-29 12:30:00','2019-05-30 18:30:00',NULL),(8,5,1,NULL,'2019-05-16 18:30:00','2019-05-08 18:30:00',NULL),(9,5,1,NULL,'2019-05-15 18:30:00','2019-05-16 01:18:00',NULL);
 /*!40000 ALTER TABLE `solicitacao_locacao` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `t_criacao_locacao` AFTER UPDATE ON `solicitacao_locacao` FOR EACH ROW begin
+
+	declare valor float;
+	set valor = (select ((select v.valorHora from veiculo as v where v.idVeiculo = NEW.idVeiculo) * 
+    CEILING(TIMESTAMPDIFF(MINUTE, new.horarioInicio, new.horarioFim)/60)));
+    
+     
+
+	if(OLD.confirmLocador is null and NEW.confirmLocador = 1) then
+		insert into locacao(idSolicitacao_locacao, valor) values(OLD.idSolicitacao_Locacao, valor);
+	end if;
+		
+end */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `telefone`
@@ -2301,4 +2376,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-15 11:12:40
+-- Dump completed on 2019-05-15 23:06:50
