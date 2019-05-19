@@ -1386,67 +1386,6 @@ INSERT INTO `veiculo` (`idVeiculo`, `idCategoria_Veiculo`, `idCliente`, `cor`, `
 	(22, 3, 4, 'Vermelho', 15, 123, 101, 150, 2012, 2000, 1, 1, 1, 0);
 /*!40000 ALTER TABLE `veiculo` ENABLE KEYS */;
 
--- Copiando estrutura para view dbmob.vpendencia_cliente
-DROP VIEW IF EXISTS `vpendencia_cliente`;
--- Criando tabela temporária para evitar erros de dependência de VIEW
-CREATE TABLE `vpendencia_cliente` (
-	`idPendencia` INT(11) NOT NULL,
-	`nome` VARCHAR(45) NOT NULL COLLATE 'utf8_general_ci',
-	`id` INT(11) NOT NULL,
-	`motivo` TEXT NULL COLLATE 'utf8_general_ci',
-	`aberto` TINYINT(4) NULL
-) ENGINE=MyISAM;
-
--- Copiando estrutura para view dbmob.vpendencia_veiculo
-DROP VIEW IF EXISTS `vpendencia_veiculo`;
--- Criando tabela temporária para evitar erros de dependência de VIEW
-CREATE TABLE `vpendencia_veiculo` (
-	`idPendencia` INT(11) NOT NULL,
-	`nome` VARCHAR(91) NOT NULL COLLATE 'utf8_general_ci',
-	`id` INT(11) NOT NULL,
-	`motivo` TEXT NOT NULL COLLATE 'utf8_general_ci',
-	`aberto` TINYINT(4) NULL
-) ENGINE=MyISAM;
-
--- Copiando estrutura para view dbmob.vsolicitacao_locacao
-DROP VIEW IF EXISTS `vsolicitacao_locacao`;
--- Criando tabela temporária para evitar erros de dependência de VIEW
-CREATE TABLE `vsolicitacao_locacao` (
-	`idSolicitacao_Locacao` INT(11) NOT NULL,
-	`idCliente` INT(11) NOT NULL,
-	`nomeCliente` VARCHAR(45) NOT NULL COLLATE 'utf8_general_ci',
-	`idDono` BIGINT(11) NULL,
-	`veiculo` VARCHAR(91) NOT NULL COLLATE 'utf8_general_ci',
-	`horarioInicio` DATETIME NOT NULL,
-	`horarioFim` DATETIME NOT NULL,
-	`motivoRecusa` VARCHAR(100) NULL COLLATE 'utf8_general_ci'
-) ENGINE=MyISAM;
-
--- Copiando estrutura para view dbmob.vvisualizacao_cancelamento
-DROP VIEW IF EXISTS `vvisualizacao_cancelamento`;
--- Criando tabela temporária para evitar erros de dependência de VIEW
-CREATE TABLE `vvisualizacao_cancelamento` (
-	`idCancelamento` INT(11) NOT NULL,
-	`idLocacao` INT(11) NOT NULL,
-	`nome` VARCHAR(45) NOT NULL COLLATE 'utf8_general_ci',
-	`idCliente` INT(11) NOT NULL,
-	`confirmacao` TINYINT(4) NULL,
-	`motivo` TEXT NOT NULL COLLATE 'utf8_general_ci'
-) ENGINE=MyISAM;
-
--- Copiando estrutura para view dbmob.v_detalhes_locacao
-DROP VIEW IF EXISTS `v_detalhes_locacao`;
--- Criando tabela temporária para evitar erros de dependência de VIEW
-CREATE TABLE `v_detalhes_locacao` (
-	`Idlocacao` INT(11) NOT NULL,
-	`Locatario` VARCHAR(45) NOT NULL COLLATE 'utf8_general_ci',
-	`Locador` VARCHAR(45) NOT NULL COLLATE 'utf8_general_ci',
-	`Veiculo` VARCHAR(91) NOT NULL COLLATE 'utf8_general_ci',
-	`Inicio` DATETIME NOT NULL,
-	`Fim` DATETIME NOT NULL,
-	`Valor total` DOUBLE NULL
-) ENGINE=MyISAM;
-
 -- Copiando estrutura para trigger dbmob.tg_cadastro_cliente_pendencia
 DROP TRIGGER IF EXISTS `tg_cadastro_cliente_pendencia`;
 SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION';
@@ -1574,49 +1513,49 @@ SET SQL_MODE=@OLDTMP_SQL_MODE;
 DROP VIEW IF EXISTS `vanuncios_mobile`;
 -- Removendo tabela temporária e criando a estrutura VIEW final
 DROP TABLE IF EXISTS `vanuncios_mobile`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`mob`@`%` SQL SECURITY DEFINER VIEW `vanuncios_mobile` AS select `v`.`idVeiculo` AS `idVeiculo`,`mo`.`nomeModelo` AS `nomeModelo`,`ma`.`nomeMarca` AS `nomeMarca`,`ft`.`fotoVeiculo` AS `fotoVeiculo` from (((`veiculo` `v` join `modelo` `mo` on((`v`.`idModelo` = `mo`.`idModelo`))) join `marca` `ma` on((`ma`.`idMarca` = `mo`.`idMarca`))) join `foto_veiculo` `ft` on((`ft`.`idVeiculo` = `v`.`idVeiculo`))) where (`ft`.`perfil` = 'frontal');
+CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `vanuncios_mobile` AS select `v`.`idVeiculo` AS `idVeiculo`,`mo`.`nomeModelo` AS `nomeModelo`,`ma`.`nomeMarca` AS `nomeMarca`,`ft`.`fotoVeiculo` AS `fotoVeiculo` from (((`veiculo` `v` join `modelo` `mo` on((`v`.`idModelo` = `mo`.`idModelo`))) join `marca` `ma` on((`ma`.`idMarca` = `mo`.`idMarca`))) join `foto_veiculo` `ft` on((`ft`.`idVeiculo` = `v`.`idVeiculo`))) where (`ft`.`perfil` = 'frontal');
 
 -- Copiando estrutura para view dbmob.vavaliacao_veiculo
 DROP VIEW IF EXISTS `vavaliacao_veiculo`;
 -- Removendo tabela temporária e criando a estrutura VIEW final
 DROP TABLE IF EXISTS `vavaliacao_veiculo`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`mob`@`%` SQL SECURITY DEFINER VIEW `vavaliacao_veiculo` AS select distinct `v`.`idVeiculo` AS `idVeiculo`,`mo`.`nomeModelo` AS `nomeModelo`,`ma`.`nomeMarca` AS `nomeMarca`,`a`.`depoimento` AS `depoimento`,`a`.`nota` AS `nota` from ((((`avaliacao_veiculo` `av` join `veiculo` `v` on((`v`.`idVeiculo` = `av`.`idVeiculo`))) join `modelo` `mo` on((`v`.`idModelo` = `mo`.`idModelo`))) join `marca` `ma` on((`mo`.`idMarca` = `ma`.`idMarca`))) join `avaliacao` `a` on((`a`.`idAvaliacao` = `av`.`idAvaliacao`)));
+CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `vavaliacao_veiculo` AS select distinct `v`.`idVeiculo` AS `idVeiculo`,`mo`.`nomeModelo` AS `nomeModelo`,`ma`.`nomeMarca` AS `nomeMarca`,`a`.`depoimento` AS `depoimento`,`a`.`nota` AS `nota` from ((((`avaliacao_veiculo` `av` join `veiculo` `v` on((`v`.`idVeiculo` = `av`.`idVeiculo`))) join `modelo` `mo` on((`v`.`idModelo` = `mo`.`idModelo`))) join `marca` `ma` on((`mo`.`idMarca` = `ma`.`idMarca`))) join `avaliacao` `a` on((`a`.`idAvaliacao` = `av`.`idAvaliacao`)));
 
 -- Copiando estrutura para view dbmob.vdetalhes_veiculo
 DROP VIEW IF EXISTS `vdetalhes_veiculo`;
 -- Removendo tabela temporária e criando a estrutura VIEW final
 DROP TABLE IF EXISTS `vdetalhes_veiculo`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`mob`@`%` SQL SECURITY DEFINER VIEW `vdetalhes_veiculo` AS select `v`.`idVeiculo` AS `idVeiculo`,`mo`.`nomeModelo` AS `nomeModelo`,`ma`.`nomeMarca` AS `nomeMarca`,`v`.`cor` AS `cor`,`v`.`valorHora` AS `valor`,`v`.`ano` AS `ano`,(select avg(`a`.`nota`) from (`avaliacao` `a` join `avaliacao_veiculo` `av` on((`a`.`idAvaliacao` = `av`.`idAvaliacao`))) where (`av`.`idVeiculo` = `v`.`idVeiculo`)) AS `nota` from (((`veiculo` `v` join `modelo` `mo` on((`v`.`idModelo` = `mo`.`idModelo`))) join `marca` `ma` on((`ma`.`idMarca` = `mo`.`idMarca`))) join `foto_veiculo` `ft` on((`ft`.`idVeiculo` = `v`.`idVeiculo`)));
+CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `vdetalhes_veiculo` AS select `v`.`idVeiculo` AS `idVeiculo`,`mo`.`nomeModelo` AS `nomeModelo`,`ma`.`nomeMarca` AS `nomeMarca`,`v`.`cor` AS `cor`,`v`.`valorHora` AS `valor`,`v`.`ano` AS `ano`,(select avg(`a`.`nota`) from (`avaliacao` `a` join `avaliacao_veiculo` `av` on((`a`.`idAvaliacao` = `av`.`idAvaliacao`))) where (`av`.`idVeiculo` = `v`.`idVeiculo`)) AS `nota` from (((`veiculo` `v` join `modelo` `mo` on((`v`.`idModelo` = `mo`.`idModelo`))) join `marca` `ma` on((`ma`.`idMarca` = `mo`.`idMarca`))) join `foto_veiculo` `ft` on((`ft`.`idVeiculo` = `v`.`idVeiculo`)));
 
 -- Copiando estrutura para view dbmob.vpendencia_cliente
 DROP VIEW IF EXISTS `vpendencia_cliente`;
 -- Removendo tabela temporária e criando a estrutura VIEW final
 DROP TABLE IF EXISTS `vpendencia_cliente`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`mob`@`%` SQL SECURITY DEFINER VIEW `vpendencia_cliente` AS select `p`.`idPendencia_Cliente` AS `idPendencia`,`c`.`nome` AS `nome`,`c`.`idCliente` AS `id`,`p`.`motivo` AS `motivo`,`p`.`aberto` AS `aberto` from (`pendencia_cliente` `p` join `cliente` `c` on((`p`.`idCliente` = `c`.`idCliente`)));
+CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `vpendencia_cliente` AS select `p`.`idPendencia_Cliente` AS `idPendencia`,`c`.`nome` AS `nome`,`c`.`idCliente` AS `id`,`p`.`motivo` AS `motivo`,`p`.`aberto` AS `aberto` from (`pendencia_cliente` `p` join `cliente` `c` on((`p`.`idCliente` = `c`.`idCliente`)));
 
 -- Copiando estrutura para view dbmob.vpendencia_veiculo
 DROP VIEW IF EXISTS `vpendencia_veiculo`;
 -- Removendo tabela temporária e criando a estrutura VIEW final
 DROP TABLE IF EXISTS `vpendencia_veiculo`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`mob`@`%` SQL SECURITY DEFINER VIEW `vpendencia_veiculo` AS select `pv`.`idPendencia_Veiculo` AS `idPendencia`,concat(`mar`.`nomeMarca`,' ',`m`.`nomeModelo`) AS `nome`,`v`.`idVeiculo` AS `id`,`pv`.`motivo` AS `motivo`,`pv`.`aberto` AS `aberto` from (((`pendencia_veiculo` `pv` join `veiculo` `v` on((`pv`.`idVeiculo` = `v`.`idVeiculo`))) join `modelo` `m` on((`m`.`idModelo` = `v`.`idModelo`))) join `marca` `mar` on((`m`.`idMarca` = `mar`.`idMarca`)));
+CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `vpendencia_veiculo` AS select `pv`.`idPendencia_Veiculo` AS `idPendencia`,concat(`mar`.`nomeMarca`,' ',`m`.`nomeModelo`) AS `nome`,`v`.`idVeiculo` AS `id`,`pv`.`motivo` AS `motivo`,`pv`.`aberto` AS `aberto` from (((`pendencia_veiculo` `pv` join `veiculo` `v` on((`pv`.`idVeiculo` = `v`.`idVeiculo`))) join `modelo` `m` on((`m`.`idModelo` = `v`.`idModelo`))) join `marca` `mar` on((`m`.`idMarca` = `mar`.`idMarca`)));
 
 -- Copiando estrutura para view dbmob.vsolicitacao_locacao
 DROP VIEW IF EXISTS `vsolicitacao_locacao`;
 -- Removendo tabela temporária e criando a estrutura VIEW final
 DROP TABLE IF EXISTS `vsolicitacao_locacao`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`mob`@`%` SQL SECURITY DEFINER VIEW `vsolicitacao_locacao` AS select `sl`.`idSolicitacao_Locacao` AS `idSolicitacao_Locacao`,`c`.`idCliente` AS `idCliente`,`c`.`nome` AS `nomeCliente`,(select `c`.`idCliente` from (`cliente` `c` join `veiculo` `ve` on((`ve`.`idCliente` = `c`.`idCliente`))) where (`ve`.`idVeiculo` = `v`.`idVeiculo`)) AS `idDono`,concat(`ma`.`nomeMarca`,' ',`mo`.`nomeModelo`) AS `veiculo`,`sl`.`horarioInicio` AS `horarioInicio`,`sl`.`horarioFim` AS `horarioFim`,`sl`.`motivoRecusa` AS `motivoRecusa` from ((((`solicitacao_locacao` `sl` join `cliente` `c` on((`sl`.`idCliente` = `c`.`idCliente`))) join `veiculo` `v` on((`v`.`idVeiculo` = `sl`.`idVeiculo`))) join `modelo` `mo` on((`mo`.`idModelo` = `v`.`idModelo`))) join `marca` `ma` on((`ma`.`idMarca` = `mo`.`idMarca`))) where isnull(`sl`.`confirmLocador`);
+CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `vsolicitacao_locacao` AS select `sl`.`idSolicitacao_Locacao` AS `idSolicitacao_Locacao`,`c`.`idCliente` AS `idCliente`,`c`.`nome` AS `nomeCliente`,(select `c`.`idCliente` from (`cliente` `c` join `veiculo` `ve` on((`ve`.`idCliente` = `c`.`idCliente`))) where (`ve`.`idVeiculo` = `v`.`idVeiculo`)) AS `idDono`,concat(`ma`.`nomeMarca`,' ',`mo`.`nomeModelo`) AS `veiculo`,`sl`.`horarioInicio` AS `horarioInicio`,`sl`.`horarioFim` AS `horarioFim`,`sl`.`motivoRecusa` AS `motivoRecusa` from ((((`solicitacao_locacao` `sl` join `cliente` `c` on((`sl`.`idCliente` = `c`.`idCliente`))) join `veiculo` `v` on((`v`.`idVeiculo` = `sl`.`idVeiculo`))) join `modelo` `mo` on((`mo`.`idModelo` = `v`.`idModelo`))) join `marca` `ma` on((`ma`.`idMarca` = `mo`.`idMarca`))) where isnull(`sl`.`confirmLocador`);
 
 -- Copiando estrutura para view dbmob.vvisualizacao_cancelamento
 DROP VIEW IF EXISTS `vvisualizacao_cancelamento`;
 -- Removendo tabela temporária e criando a estrutura VIEW final
 DROP TABLE IF EXISTS `vvisualizacao_cancelamento`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`mob`@`%` SQL SECURITY DEFINER VIEW `vvisualizacao_cancelamento` AS select `c`.`idCancelamento` AS `idCancelamento`,`l`.`idLocacao` AS `idLocacao`,`cl`.`nome` AS `nome`,`c`.`idCliente` AS `idCliente`,`c`.`confirmacao` AS `confirmacao`,`c`.`motivo` AS `motivo` from (((`cancelamento` `c` join `locacao` `l` on((`l`.`idLocacao` = `c`.`idLocacao`))) join `solicitacao_locacao` `sl` on((`sl`.`idSolicitacao_Locacao` = `l`.`idSolicitacao_Locacao`))) join `cliente` `cl` on((`cl`.`idCliente` = `sl`.`idCliente`))) where isnull(`c`.`confirmacao`);
+CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `vvisualizacao_cancelamento` AS select `c`.`idCancelamento` AS `idCancelamento`,`l`.`idLocacao` AS `idLocacao`,`cl`.`nome` AS `nome`,`c`.`idCliente` AS `idCliente`,`c`.`confirmacao` AS `confirmacao`,`c`.`motivo` AS `motivo` from (((`cancelamento` `c` join `locacao` `l` on((`l`.`idLocacao` = `c`.`idLocacao`))) join `solicitacao_locacao` `sl` on((`sl`.`idSolicitacao_Locacao` = `l`.`idSolicitacao_Locacao`))) join `cliente` `cl` on((`cl`.`idCliente` = `sl`.`idCliente`))) where isnull(`c`.`confirmacao`);
 
 -- Copiando estrutura para view dbmob.v_detalhes_locacao
 DROP VIEW IF EXISTS `v_detalhes_locacao`;
 -- Removendo tabela temporária e criando a estrutura VIEW final
 DROP TABLE IF EXISTS `v_detalhes_locacao`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`mob`@`%` SQL SECURITY DEFINER VIEW `v_detalhes_locacao` AS select `l`.`idLocacao` AS `Idlocacao`,`cl`.`nome` AS `Locatario`,`cl2`.`nome` AS `Locador`,concat(`ma`.`nomeMarca`,' ',`mo`.`nomeModelo`) AS `Veiculo`,`sl`.`horarioInicio` AS `Inicio`,`sl`.`horarioFim` AS `Fim`,(`v`.`valorHora` * ceiling(((select timestampdiff(MINUTE,`solicitacao_locacao`.`horarioInicio`,`solicitacao_locacao`.`horarioFim`) from `solicitacao_locacao` where (`solicitacao_locacao`.`idSolicitacao_Locacao` = 1)) / 60))) AS `Valor total` from ((((((`solicitacao_locacao` `sl` join `cliente` `cl` on((`sl`.`idCliente` = `cl`.`idCliente`))) join `veiculo` `v` on((`v`.`idVeiculo` = `sl`.`idVeiculo`))) join `cliente` `cl2` on((`cl2`.`idCliente` = `v`.`idCliente`))) join `locacao` `l` on((`l`.`idSolicitacao_Locacao` = `sl`.`idSolicitacao_Locacao`))) join `modelo` `mo` on((`mo`.`idModelo` = `v`.`idModelo`))) join `marca` `ma` on((`ma`.`idMarca` = `mo`.`idMarca`)));
+CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `v_detalhes_locacao` AS select `l`.`idLocacao` AS `Idlocacao`,`cl`.`nome` AS `Locatario`,`cl2`.`nome` AS `Locador`,concat(`ma`.`nomeMarca`,' ',`mo`.`nomeModelo`) AS `Veiculo`,`sl`.`horarioInicio` AS `Inicio`,`sl`.`horarioFim` AS `Fim`,(`v`.`valorHora` * ceiling(((select timestampdiff(MINUTE,`solicitacao_locacao`.`horarioInicio`,`solicitacao_locacao`.`horarioFim`) from `solicitacao_locacao` where (`solicitacao_locacao`.`idSolicitacao_Locacao` = 1)) / 60))) AS `Valor total` from ((((((`solicitacao_locacao` `sl` join `cliente` `cl` on((`sl`.`idCliente` = `cl`.`idCliente`))) join `veiculo` `v` on((`v`.`idVeiculo` = `sl`.`idVeiculo`))) join `cliente` `cl2` on((`cl2`.`idCliente` = `v`.`idCliente`))) join `locacao` `l` on((`l`.`idSolicitacao_Locacao` = `sl`.`idSolicitacao_Locacao`))) join `modelo` `mo` on((`mo`.`idModelo` = `v`.`idModelo`))) join `marca` `ma` on((`ma`.`idMarca` = `mo`.`idMarca`)));
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
