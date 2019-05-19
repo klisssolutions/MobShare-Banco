@@ -2253,6 +2253,8 @@ SET character_set_client = utf8mb4;
  1 AS `veiculo`,
  1 AS `horarioInicio`,
  1 AS `horarioFim`,
+ 1 AS `devolvido`,
+ 1 AS `recebido`,
  1 AS `valor`*/;
 SET character_set_client = @saved_cs_client;
 
@@ -2417,7 +2419,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `vhistorico_locacao` AS select `l`.`idLocacao` AS `idLocacao`,`c`.`idCliente` AS `idCliente`,`c`.`nome` AS `nomeCliente`,(select `c`.`idCliente` from (`cliente` `c` join `veiculo` `ve` on((`ve`.`idCliente` = `c`.`idCliente`))) where (`ve`.`idVeiculo` = `v`.`idVeiculo`)) AS `idDono`,concat(`ma`.`nomeMarca`,' ',`mo`.`nomeModelo`) AS `veiculo`,`sl`.`horarioInicio` AS `horarioInicio`,`sl`.`horarioFim` AS `horarioFim`,`l`.`valor` AS `valor` from (((((`solicitacao_locacao` `sl` join `cliente` `c` on((`sl`.`idCliente` = `c`.`idCliente`))) join `veiculo` `v` on((`v`.`idVeiculo` = `sl`.`idVeiculo`))) join `modelo` `mo` on((`mo`.`idModelo` = `v`.`idModelo`))) join `marca` `ma` on((`ma`.`idMarca` = `mo`.`idMarca`))) join `locacao` `l` on((`l`.`idSolicitacao_Locacao` = `sl`.`idSolicitacao_Locacao`))) */;
+/*!50001 VIEW `vhistorico_locacao` AS select `l`.`idLocacao` AS `idLocacao`,`c`.`idCliente` AS `idCliente`,`c`.`nome` AS `nomeCliente`,(select `c`.`idCliente` from (`cliente` `c` join `veiculo` `ve` on((`ve`.`idCliente` = `c`.`idCliente`))) where (`ve`.`idVeiculo` = `v`.`idVeiculo`)) AS `idDono`,concat(`ma`.`nomeMarca`,' ',`mo`.`nomeModelo`) AS `veiculo`,`sl`.`horarioInicio` AS `horarioInicio`,`sl`.`horarioFim` AS `horarioFim`,`l`.`devolvido` AS `devolvido`,`l`.`recebido` AS `recebido`,`l`.`valor` AS `valor` from (((((`solicitacao_locacao` `sl` join `cliente` `c` on((`sl`.`idCliente` = `c`.`idCliente`))) join `veiculo` `v` on((`v`.`idVeiculo` = `sl`.`idVeiculo`))) join `modelo` `mo` on((`mo`.`idModelo` = `v`.`idModelo`))) join `marca` `ma` on((`ma`.`idMarca` = `mo`.`idMarca`))) join `locacao` `l` on((`l`.`idSolicitacao_Locacao` = `sl`.`idSolicitacao_Locacao`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -2503,4 +2505,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-19  8:57:32
+-- Dump completed on 2019-05-19  9:38:46
