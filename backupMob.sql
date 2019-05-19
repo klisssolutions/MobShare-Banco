@@ -1313,40 +1313,6 @@ INSERT INTO `usuario_web` (`idUsuario_Web`, `email`, `senha`, `idNivel`, `nome`)
 	(13, 'marcao@marc', 'a', 1, 'marcao');
 /*!40000 ALTER TABLE `usuario_web` ENABLE KEYS */;
 
--- Copiando estrutura para view dbmob.vanuncios_mobile
-DROP VIEW IF EXISTS `vanuncios_mobile`;
--- Criando tabela temporária para evitar erros de dependência de VIEW
-CREATE TABLE `vanuncios_mobile` (
-	`idVeiculo` INT(11) NOT NULL,
-	`nomeModelo` VARCHAR(45) NOT NULL COLLATE 'utf8_general_ci',
-	`nomeMarca` VARCHAR(45) NOT NULL COLLATE 'utf8_general_ci',
-	`fotoVeiculo` VARCHAR(100) NOT NULL COLLATE 'utf8_general_ci'
-) ENGINE=MyISAM;
-
--- Copiando estrutura para view dbmob.vavaliacao_veiculo
-DROP VIEW IF EXISTS `vavaliacao_veiculo`;
--- Criando tabela temporária para evitar erros de dependência de VIEW
-CREATE TABLE `vavaliacao_veiculo` (
-	`idVeiculo` INT(11) NOT NULL,
-	`nomeModelo` VARCHAR(45) NOT NULL COLLATE 'utf8_general_ci',
-	`nomeMarca` VARCHAR(45) NOT NULL COLLATE 'utf8_general_ci',
-	`depoimento` TEXT NULL COLLATE 'utf8_general_ci',
-	`nota` TINYINT(4) NOT NULL
-) ENGINE=MyISAM;
-
--- Copiando estrutura para view dbmob.vdetalhes_veiculo
-DROP VIEW IF EXISTS `vdetalhes_veiculo`;
--- Criando tabela temporária para evitar erros de dependência de VIEW
-CREATE TABLE `vdetalhes_veiculo` (
-	`idVeiculo` INT(11) NOT NULL,
-	`nomeModelo` VARCHAR(45) NOT NULL COLLATE 'utf8_general_ci',
-	`nomeMarca` VARCHAR(45) NOT NULL COLLATE 'utf8_general_ci',
-	`cor` VARCHAR(45) NOT NULL COLLATE 'utf8_general_ci',
-	`valor` FLOAT NULL,
-	`ano` INT(11) NOT NULL,
-	`nota` DECIMAL(7,4) NULL
-) ENGINE=MyISAM;
-
 -- Copiando estrutura para tabela dbmob.veiculo
 DROP TABLE IF EXISTS `veiculo`;
 CREATE TABLE IF NOT EXISTS `veiculo` (
