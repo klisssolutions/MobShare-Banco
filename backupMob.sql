@@ -140,7 +140,7 @@ CREATE TABLE `avaliacao` (
   PRIMARY KEY (`idAvaliacao`),
   KEY `idLocacao` (`idLocacao`),
   CONSTRAINT `avaliacao_ibfk_1` FOREIGN KEY (`idLocacao`) REFERENCES `locacao` (`idlocacao`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -169,7 +169,7 @@ CREATE TABLE `avaliacao_cliente` (
   KEY `idAvaliacao` (`idAvaliacao`),
   CONSTRAINT `avaliacao_cliente_ibfk_1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idcliente`) ON DELETE CASCADE,
   CONSTRAINT `avaliacao_cliente_ibfk_2` FOREIGN KEY (`idAvaliacao`) REFERENCES `avaliacao` (`idavaliacao`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -197,7 +197,7 @@ CREATE TABLE `avaliacao_veiculo` (
   KEY `idAvaliacao` (`idAvaliacao`),
   CONSTRAINT `avaliacao_veiculo_ibfk_1` FOREIGN KEY (`idVeiculo`) REFERENCES `veiculo` (`idveiculo`),
   CONSTRAINT `avaliacao_veiculo_ibfk_2` FOREIGN KEY (`idAvaliacao`) REFERENCES `avaliacao` (`idavaliacao`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -320,7 +320,7 @@ CREATE TABLE `banner` (
 
 LOCK TABLES `banner` WRITE;
 /*!40000 ALTER TABLE `banner` DISABLE KEYS */;
-INSERT INTO `banner` VALUES (4,'Ganhe dinheiro!','724c4d9607e27894f21df14c6be64ef0.png','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','kjbjk','jkbjkb',1),(5,'Baixe o APP!','ap.png','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','sdfsdf','BAIXAR',1);
+INSERT INTO `banner` VALUES (4,'Alugue todo tipo de veículo!','aaa.png','Aqui na Mobshare, você pode locar carros, motos e até bicicletas bem perto de você. O intuito é que você tenha conforto e comodidate ao máximo.','kjbjk','Quero conhecer',1),(5,'Baixe o APP!','appCine.png','Tenha mais facilidade em alugar um veículo usando o aplicativo da Mobshare que está disponível para download.','https://github.com/klisssolutions/Mobshare---APP','BAIXAR',1);
 /*!40000 ALTER TABLE `banner` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1218,7 +1218,7 @@ CREATE TABLE `funcionamento` (
 
 LOCK TABLES `funcionamento` WRITE;
 /*!40000 ALTER TABLE `funcionamento` DISABLE KEYS */;
-INSERT INTO `funcionamento` VALUES (6,'Como Faço uma Locação','aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa','69c2bfc3c0e9ec62928cb87394acbcc3.png',1),(7,'Como eu me Cadastro','ooooooooooooooo','c82ceb1f8c44127e6f31ca5db94fae5d.png',1);
+INSERT INTO `funcionamento` VALUES (6,'Como fuciona o pagamento?','O pagamento é feito antes de você pegar o veículo para usar através do cartão de crédito! ','como.png',1),(7,'Como posso ganhar dinheiro?','Na Mobshare, depois de se cadastrar você pode disponibilizar seus veiculos para locação, desde que eles estejam em boas condições. O retorno é feito pela empresa direto para sua conta!','como1.png',1);
 /*!40000 ALTER TABLE `funcionamento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1337,7 +1337,7 @@ CREATE TABLE `locacao` (
 
 LOCK TABLES `locacao` WRITE;
 /*!40000 ALTER TABLE `locacao` DISABLE KEYS */;
-INSERT INTO `locacao` VALUES (1,1,NULL,1,0),(2,2,NULL,1,0),(27,3,10,0,0);
+INSERT INTO `locacao` VALUES (1,1,NULL,0,0),(2,2,NULL,1,0),(27,3,10,0,1);
 /*!40000 ALTER TABLE `locacao` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -1518,7 +1518,7 @@ CREATE TABLE `parceiro` (
 
 LOCK TABLES `parceiro` WRITE;
 /*!40000 ALTER TABLE `parceiro` DISABLE KEYS */;
-INSERT INTO `parceiro` VALUES (42,'Ford','https://www.ford.com.br/','d841c82596337ffd7589d04010abd7e8.png','Ford Motor Company é uma fabricante de automóveis multinacional estadunidense sediada em Dearborn, Michigan, um subúrbio de Detroit. Foi fundada por Henry Ford e incorporada em 16 de junho de 1903.','kaio.wesley074@gmail.com',1),(43,'Sarah Alguma coisa','kakakaakjjjjjjjjjjjjjjjjjjjj','1c8deede837fdbbf163f672d1255eb1c.png','teste','kaio.algo@gmail.com',1);
+INSERT INTO `parceiro` VALUES (42,'Movida - Aluguel de Carros','https://www.movida.com.br/','movida.jpg','Desde 2006 no mercado, a Movida Aluguel de Carros conta com a frota mais nova do Brasil e dispõe de lojas nas principais cidades e aeroportos do país. Adquirida em 2013 pelo Grupo JSL, hoje faz parte da empresa Movida Participações, criada em 2015 para administrar as operações de Aluguel de Carros, Venda de Seminovos e de Gestão de Terceirização de Frotas de veículos leves.','movida@contato.com',1),(43,'Rentalcars.com','https://www.rentalcars.com','rental.png','Começámos em 2004 como TravelJigsaw Quatro anos mais tarde, estávamos a fazer 1000 reservas por dia. Em 2010, juntámo-nos ao Grupo Priceline e mudámos de nome para Rentalcars.com.','kaio.algo@gmail.com',1);
 /*!40000 ALTER TABLE `parceiro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1889,7 +1889,7 @@ CREATE TABLE `solicitacao_locacao` (
   KEY `idVeiculo` (`idVeiculo`),
   CONSTRAINT `solicitacao_locacao_ibfk_1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idcliente`),
   CONSTRAINT `solicitacao_locacao_ibfk_2` FOREIGN KEY (`idVeiculo`) REFERENCES `veiculo` (`idveiculo`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1898,7 +1898,7 @@ CREATE TABLE `solicitacao_locacao` (
 
 LOCK TABLES `solicitacao_locacao` WRITE;
 /*!40000 ALTER TABLE `solicitacao_locacao` DISABLE KEYS */;
-INSERT INTO `solicitacao_locacao` VALUES (1,4,1,1,'2019-04-15 10:00:00','2019-04-15 16:00:00',NULL),(2,4,2,1,'2019-05-05 10:00:00','2019-05-05 15:00:00',NULL),(3,1,1,1,'2019-04-15 16:00:00','2019-04-15 18:00:00',NULL),(4,5,1,NULL,'2019-04-15 16:20:00','2019-04-15 12:30:00',NULL),(5,5,1,NULL,'2019-04-15 02:20:00','2019-04-15 03:30:00',NULL),(6,5,1,NULL,'2019-05-29 02:26:00','2019-05-30 02:26:00',NULL),(7,5,1,NULL,'2019-05-29 12:30:00','2019-05-30 18:30:00',NULL),(8,5,1,NULL,'2019-05-16 18:30:00','2019-05-08 18:30:00',NULL),(9,5,1,NULL,'2019-05-15 18:30:00','2019-05-16 01:18:00',NULL);
+INSERT INTO `solicitacao_locacao` VALUES (1,4,1,1,'2019-04-15 10:00:00','2019-04-15 16:00:00',NULL),(2,4,2,1,'2019-05-05 10:00:00','2019-05-05 15:00:00',NULL),(3,1,1,1,'2019-04-15 16:00:00','2019-04-15 18:00:00',NULL),(4,5,1,NULL,'2019-04-15 16:20:00','2019-04-15 12:30:00',NULL),(5,5,1,NULL,'2019-04-15 02:20:00','2019-04-15 03:30:00',NULL),(6,5,1,NULL,'2019-05-29 02:26:00','2019-05-30 02:26:00',NULL),(7,5,1,NULL,'2019-05-29 12:30:00','2019-05-30 18:30:00',NULL),(8,5,1,NULL,'2019-05-16 18:30:00','2019-05-08 18:30:00',NULL),(9,5,1,NULL,'2019-05-15 18:30:00','2019-05-16 01:18:00',NULL),(10,1,1,NULL,'2019-05-07 00:00:00','2019-05-08 00:00:00',NULL),(11,1,1,NULL,'2019-05-07 00:00:00','2019-05-08 00:00:00',NULL);
 /*!40000 ALTER TABLE `solicitacao_locacao` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -1968,7 +1968,7 @@ CREATE TABLE `termo` (
   `texto` text NOT NULL,
   `ativo` tinyint(4) DEFAULT '1',
   PRIMARY KEY (`idTermo`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1977,7 +1977,7 @@ CREATE TABLE `termo` (
 
 LOCK TABLES `termo` WRITE;
 /*!40000 ALTER TABLE `termo` DISABLE KEYS */;
-INSERT INTO `termo` VALUES (2,'Termo 1','Talvez você precise registrar-se com a The Coca-Cola Company para obter acesso a determinadas áreas do Site. Com relação a esse registro, nós podemos nos recusar a fornecer a você, ou permitir o uso de, um nome de usuário (ou endereço de e-mail) que já esteja sendo usado por outro usuário; que seja usado para se fazer passar por outra pessoa; que pertença a outra pessoa; que viole a propriedade intelectual ou outros direitos de uma pessoa; que seja ofensivo; ou por outro motivo a nosso critério.',1);
+INSERT INTO `termo` VALUES (3,'Sobre a locação','1. A locação é feita através do site, com a comunicação entre locador e locatário. Tendo em vista que a Mobshare não se responsabiliza por esses acordos, apenas fazemos a comunicação entre eles.',1),(4,'Sobre o veiculo','2. A Mobshare não se responsabiliza por danos, multas, danificações feitas no veiculo durante a locação. Cabe ao locador e locatário resolver as pendências,',1);
 /*!40000 ALTER TABLE `termo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2108,6 +2108,22 @@ LOCK TABLES `usuario_web` WRITE;
 INSERT INTO `usuario_web` VALUES (1,'teste@teste','teste',1,'teste'),(2,'sdasd@dsad','igor',2,'igor'),(12,'kaio.wesley074@gmail.com','teste',1,'Kaio'),(13,'marcao@marc','a',1,'marcao');
 /*!40000 ALTER TABLE `usuario_web` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Temporary view structure for view `v_conta_receber`
+--
+
+DROP TABLE IF EXISTS `v_conta_receber`;
+/*!50001 DROP VIEW IF EXISTS `v_conta_receber`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8mb4;
+/*!50001 CREATE VIEW `v_conta_receber` AS SELECT 
+ 1 AS `idConta_Receber`,
+ 1 AS `valor`,
+ 1 AS `vencimento`,
+ 1 AS `nomeBanco`,
+ 1 AS `idBanco`*/;
+SET character_set_client = @saved_cs_client;
 
 --
 -- Temporary view structure for view `v_detalhes_locacao`
@@ -2335,6 +2351,24 @@ SET character_set_client = @saved_cs_client;
 --
 
 --
+-- Final view structure for view `v_conta_receber`
+--
+
+/*!50001 DROP VIEW IF EXISTS `v_conta_receber`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `v_conta_receber` AS select `cr`.`idConta_Receber` AS `idConta_Receber`,`cr`.`valor` AS `valor`,`cr`.`vencimento` AS `vencimento`,`b`.`nome` AS `nomeBanco`,`b`.`idBanco` AS `idBanco` from (`conta_receber` `cr` join `banco` `b` on((`cr`.`idBanco` = `b`.`idBanco`))) where (`cr`.`paga` = 0) order by `cr`.`vencimento` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
 -- Final view structure for view `v_detalhes_locacao`
 --
 
@@ -2505,4 +2539,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-24  9:42:12
+-- Dump completed on 2019-05-28 10:42:58
