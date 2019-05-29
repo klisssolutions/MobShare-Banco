@@ -140,7 +140,7 @@ CREATE TABLE `avaliacao` (
   PRIMARY KEY (`idAvaliacao`),
   KEY `idLocacao` (`idLocacao`),
   CONSTRAINT `avaliacao_ibfk_1` FOREIGN KEY (`idLocacao`) REFERENCES `locacao` (`idlocacao`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -149,7 +149,7 @@ CREATE TABLE `avaliacao` (
 
 LOCK TABLES `avaliacao` WRITE;
 /*!40000 ALTER TABLE `avaliacao` DISABLE KEYS */;
-INSERT INTO `avaliacao` VALUES (1,4,'gostei mt',1);
+INSERT INTO `avaliacao` VALUES (1,4,'gostei mt',1),(28,5,'sensacional',27);
 /*!40000 ALTER TABLE `avaliacao` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -169,7 +169,7 @@ CREATE TABLE `avaliacao_cliente` (
   KEY `idAvaliacao` (`idAvaliacao`),
   CONSTRAINT `avaliacao_cliente_ibfk_1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idcliente`) ON DELETE CASCADE,
   CONSTRAINT `avaliacao_cliente_ibfk_2` FOREIGN KEY (`idAvaliacao`) REFERENCES `avaliacao` (`idavaliacao`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -178,6 +178,7 @@ CREATE TABLE `avaliacao_cliente` (
 
 LOCK TABLES `avaliacao_cliente` WRITE;
 /*!40000 ALTER TABLE `avaliacao_cliente` DISABLE KEYS */;
+INSERT INTO `avaliacao_cliente` VALUES (3,1,28);
 /*!40000 ALTER TABLE `avaliacao_cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -320,7 +321,7 @@ CREATE TABLE `banner` (
 
 LOCK TABLES `banner` WRITE;
 /*!40000 ALTER TABLE `banner` DISABLE KEYS */;
-INSERT INTO `banner` VALUES (4,'Alugue todo tipo de veículo!','aaa.png','Aqui na Mobshare, você pode locar carros, motos e até bicicletas bem perto de você. O intuito é que você tenha conforto e comodidate ao máximo.','kjbjk','Quero conhecer',1),(5,'Baixe o APP!','appCine.png','Tenha mais facilidade em alugar um veículo usando o aplicativo da Mobshare que está disponível para download.','https://github.com/klisssolutions/Mobshare---APP','BAIXAR',1);
+INSERT INTO `banner` VALUES (4,'Alugue todo tipo de veículo!','aaa.png','Aqui na Mobshare, você pode locar carros, motos e até bicicletas bem perto de você. O intuito é que você tenha conforto e comodidate ao máximo.','kjbjk','Quero conhecer',1),(5,'Baixe o APP!','ap.png','Tenha mais facilidade em alugar um veículo usando o aplicativo da Mobshare que está disponível para download.','https://github.com/klisssolutions/Mobshare---APP','BAIXAR',1);
 /*!40000 ALTER TABLE `banner` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -458,7 +459,7 @@ CREATE TABLE `cliente` (
   `dataCadastro` date NOT NULL,
   PRIMARY KEY (`idCliente`),
   UNIQUE KEY `cpf_UNIQUE` (`cpf`)
-) ENGINE=InnoDB AUTO_INCREMENT=365 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=375 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -467,7 +468,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (1,'Leonardo','49875265','1970-01-01','54645','A e B','leonardo_cavalcante.07@hotmail.com','123',NULL,'2019-04-02'),(4,'Maria','aaaa','1970-01-01','asda','dada','kaio.wesley074@gmail.com','ada',NULL,'1970-01-01'),(5,'João','5413',NULL,'25452','A','joao@uol','321',NULL,'2019-04-02'),(19,'teste','teste',NULL,'TESTE','a','teste','teste','leo.jpg','2019-04-02'),(20,'TESTE','TEST',NULL,'TES','A','TEST','TESTE',NULL,'2019-04-02'),(21,'MARIO','jhnvgjh',NULL,'nbv nb ','hnvhn','MARIO','123',NULL,'2019-04-02'),(22,'Sarah','266326',NULL,'1','1','sarah@uol','123',NULL,'2019-05-15'),(23,'32112332112','','2332-11-22','321123321','','anderson@tulio.com','321123','','2019-05-15'),(255,'Anderson Silva Barreto','32132132132','2019-04-30','321321321','volvo','kaio.wesley074@gmail.com','321','','2019-05-15'),(262,'O Anderson é uma mentira da silva ','42322578904','1999-02-11','123456789','saab','mentira@andersontulio.com','123','','2019-05-15'),(263,'marcao','5365','2019-04-30','65','a','sarah@uol','321',NULL,'2019-05-15'),(264,'Antonieta ','12345678910','1999-11-11','123456789','volvo','sarah@oliveira.com','123','','2019-05-15'),(342,'Portella','51','1999-11-11','65','a','a@a','123',NULL,'2019-05-15');
+INSERT INTO `cliente` VALUES (1,'Leonardo','49875265','1970-01-01','54645','A e B','leonardo_cavalcante.07@hotmail.com','123',NULL,'2019-04-02'),(4,'Maria','aaaa','1970-01-01','asda','dada','kaio.wesley074@gmail.com','ada',NULL,'1970-01-01'),(5,'João','5413',NULL,'25452','A','joao@uol','321',NULL,'2019-04-02'),(19,'teste','teste',NULL,'TESTE','a','teste','teste','leo.jpg','2019-04-02'),(20,'TESTE','TEST',NULL,'TES','A','TEST','TESTE',NULL,'2019-04-02'),(21,'MARIO','jhnvgjh',NULL,'nbv nb ','hnvhn','MARIO','123',NULL,'2019-04-02'),(22,'Sarah','266326',NULL,'1','1','sarah@uol','123',NULL,'2019-05-15'),(372,'Juan','1541165165100','2019-04-30','4181989','A','juan@juan','igor','','2019-05-29'),(374,'Igor','12346487987','2019-05-12','16516','A','igor@igor','igor','cff6f82ee0c6ac938e79d3122a26b52c.jpg','2019-05-29');
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -804,7 +805,7 @@ CREATE TABLE `conta_receber` (
 
 LOCK TABLES `conta_receber` WRITE;
 /*!40000 ALTER TABLE `conta_receber` DISABLE KEYS */;
-INSERT INTO `conta_receber` VALUES (6,'2019-06-14',1,10,NULL,1,27);
+INSERT INTO `conta_receber` VALUES (6,'2019-06-14',1,10,NULL,0,27);
 /*!40000 ALTER TABLE `conta_receber` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -1337,7 +1338,7 @@ CREATE TABLE `locacao` (
 
 LOCK TABLES `locacao` WRITE;
 /*!40000 ALTER TABLE `locacao` DISABLE KEYS */;
-INSERT INTO `locacao` VALUES (1,1,NULL,0,0),(2,2,NULL,1,0),(27,3,10,0,1);
+INSERT INTO `locacao` VALUES (1,1,NULL,1,1),(2,2,NULL,1,1),(27,3,10,0,0);
 /*!40000 ALTER TABLE `locacao` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -1672,7 +1673,7 @@ CREATE TABLE `pendencia_cliente` (
   PRIMARY KEY (`idPendencia_Cliente`),
   KEY `idCliente` (`idCliente`),
   CONSTRAINT `pendencia_cliente_ibfk_1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idcliente`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1681,7 +1682,7 @@ CREATE TABLE `pendencia_cliente` (
 
 LOCK TABLES `pendencia_cliente` WRITE;
 /*!40000 ALTER TABLE `pendencia_cliente` DISABLE KEYS */;
-INSERT INTO `pendencia_cliente` VALUES (1,4,'Aguardando aprovação',1),(2,5,'Aguardando aprovação',1),(12,19,'Aguardando aprovação',1),(13,20,'Aguardando aprovação',1),(14,21,'Aguardando aprovação',1),(15,22,'Aguardando aprovação',1),(16,23,'Aguardando aprovação',1),(17,255,'Aguardando aprovação',1),(18,262,'Aguardando aprovação',1),(19,263,'Aguardando aprovação',1),(20,264,'Aguardando aprovação',1),(21,342,'Aguardando aprovação',1);
+INSERT INTO `pendencia_cliente` VALUES (1,4,'Aguardando aprovação',1),(2,5,'Aguardando aprovação',1),(12,19,'Aguardando aprovação',1),(13,20,'Aguardando aprovação',1),(14,21,'Aguardando aprovação',1),(15,22,'Aguardando aprovação',1),(25,372,'Aguardando aprovação',1),(27,374,'Aguardando aprovação',1);
 /*!40000 ALTER TABLE `pendencia_cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2539,4 +2540,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-28 10:42:58
+-- Dump completed on 2019-05-29 11:25:37
